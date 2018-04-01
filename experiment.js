@@ -6,7 +6,7 @@ var mySceneW;
 var mySceneH;
 var myCenterX;
 var myCenterY;
-var meterTop;
+
 var arrow1;
 var arrow1A;
 var arrow2;
@@ -20,7 +20,7 @@ var arrow3A;
 var arrow4A;
 var arrow5A;
 var arrow6A;
-var camefrom="0";
+
 var helpContent;
 
 
@@ -42,6 +42,8 @@ var mesh10;
 var mesh11;
 var mesh12;
 
+var choice;
+var hasChosen=0;
 function initialiseHelp() {
     helpContent = "";
     helpContent = helpContent + "<h2>Magnetic field due to a current carrying circular loop help</h2>";
@@ -1088,7 +1090,7 @@ var material = new THREE.LineDashedMaterial( {
     // addButtonMagnet();
      // showHorseShoeMagnet();
     // showBarMagnet();
-    showRingMagnet();
+    // showRingMagnet();
     // showButtonMagnet();
 
 
@@ -1543,7 +1545,6 @@ function showBarMagnet()
     // console.log(base5);
     // PIEaddElement(base5);
     PIEaddElement(bar);
-
 }
 
 
@@ -1980,6 +1981,40 @@ function stopAnimation() {
     
     PIErender();
     console.log("at end stop anim");
+    choice=0;
+    hasChosen=0;
+    removePrevMagnets();
+    PIEchangeInputCheckbox("Bar Magnet",false);
+    PIEchangeInputCheckbox("Button Magnet",false);
+    PIEchangeInputCheckbox("Ring Magnet",false);
+    PIEchangeInputCheckbox("Horse Shoe Magnet",false);
+
+    flag1=1;
+    flag2=1;
+    flag3=1;
+    flag4=1;
+
+
+    //set all the magnets  to their orignal positions
+
+        bar.position.set(.3, 0, 0);
+        bar.rotation.y=Math.PI/6;
+
+        
+        horseShoeMagnet.position.set(-.6,-1.8,2);
+        horseShoeMagnet.rotation.x=-Math.PI/6;
+        horseShoeMagnet.rotation.y=Math.PI/6;
+
+        ringMagnet.position.set(.2, .5, 2);
+        ringMagnet.rotation.x=-Math.PI/2-Math.PI/6;
+        ringMagnet.rotation.z=-Math.PI/6+Math.PI;
+
+        buttonMagnet.position.set(.2, .5, 2);
+    buttonMagnet.rotation.x=-Math.PI/2-Math.PI/6;
+    buttonMagnet.rotation.z=-Math.PI/6+Math.PI;
+
+
+
     
 }
 
@@ -2274,6 +2309,10 @@ function loadExperimentElements() {
 
     // PIEaddDisplayCommand(a, test);
     //PIEaddDisplayCommand(, test);
+    PIEaddInputCheckbox("Bar Magnet",false,chooseBarMagnet);
+    PIEaddInputCheckbox("Button Magnet",false,chooseButtonMagnet);
+    PIEaddInputCheckbox("Ring Magnet",false,chooseRingMagnet);
+    PIEaddInputCheckbox("Horse Shoe Magnet",false,chooseHsMagnet);
     // This function adds a command element to the Display panel
 
     // The label is the id(label) appearing on the command button.
@@ -2296,6 +2335,98 @@ function loadExperimentElements() {
     //PIEsetDrag(prism2, test);
     //   document.addEventListener('mousedown', onDocumentMouseDown, false );
 }
+
+var flag1=1;
+var flag2=1;
+var flag3=1;
+var flag4=1;
+
+function chooseBarMagnet(){
+    if(flag1=1){
+    flag1=0;
+    flag2=1;
+    flag3=1;
+    flag4=1;
+   stopAnimation();
+    PIEchangeInputCheckbox("Bar Magnet",true);
+    PIEchangeInputCheckbox("Button Magnet",false);
+    PIEchangeInputCheckbox("Ring Magnet",false);
+    PIEchangeInputCheckbox("Horse Shoe Magnet",false);
+   choice="barmagnet";
+   hasChosen=1;
+   showBarMagnet();
+}
+
+
+}
+function chooseHsMagnet(){
+
+   if(flag2=1){
+    flag1=1;
+    flag2=0;
+    flag3=1;
+    flag4=1;
+   stopAnimation();
+    PIEchangeInputCheckbox("Bar Magnet",false);
+    PIEchangeInputCheckbox("Button Magnet",false);
+    PIEchangeInputCheckbox("Ring Magnet",false);
+    PIEchangeInputCheckbox("Horse Shoe Magnet",true);
+   choice="horseshoemagnet";
+   hasChosen=1;
+   showHorseShoeMagnet();
+}
+
+}
+function chooseButtonMagnet(){
+
+   if(flag3=1){
+    flag1=1;
+    flag2=1;
+    flag3=0;
+    flag4=1;
+   stopAnimation();
+    PIEchangeInputCheckbox("Bar Magnet",false);
+    PIEchangeInputCheckbox("Button Magnet",true);
+    PIEchangeInputCheckbox("Ring Magnet",false);
+    PIEchangeInputCheckbox("Horse Shoe Magnet",false);
+   choice="buttonmagnet";
+   hasChosen=1;
+   showButtonMagnet();
+
+}
+}
+function chooseRingMagnet(){
+
+   if(flag4=1){
+    flag1=1;
+    flag2=1;
+    flag3=1;
+    flag4=0;
+   stopAnimation();
+    PIEchangeInputCheckbox("Bar Magnet",false);
+    PIEchangeInputCheckbox("Button Magnet",false);
+    PIEchangeInputCheckbox("Ring Magnet",true);
+    PIEchangeInputCheckbox("Horse Shoe Magnet",false);
+   choice="ringmagnet";
+   hasChosen=1;
+   showRingMagnet();
+}
+
+
+}
+
+
+function removePrevMagnets(){
+
+    PIEremoveElement(bar);
+    PIEremoveElement(horseShoeMagnet);
+    PIEremoveElement(ringMagnet);
+    PIEremoveElement(buttonMagnet);
+    PIErender();
+
+
+}
+
 
 function resetExperiment() {
     // needprism1.position.set(0.8, 0.6, 5.05);
@@ -2326,6 +2457,9 @@ var tita;
 var titaline;
 
 function updateExperimentElements(t, dt) {
+   
+    if(hasChosen==1)
+   {
     tita = -0.05*(t/1000);
     // horseShoeMagnet.rotation.y+=Math.PI/180*Math.pow(2.7, tita)*Math.cos(t/1000);
 
@@ -2335,7 +2469,23 @@ function updateExperimentElements(t, dt) {
     // horseShoeMagnet.rotation.z-=Math.PI/1000*Math.pow(2.7, titaline)*Math.cos(t/1000);
     // bar.rotation.y-=Math.PI/180*Math.pow(2.7, titaline)*Math.cos(t/1000);
     // buttonMagnet.rotation.z-=Math.PI/180*Math.pow(2.7, titaline)*Math.cos(t/1000);
-    ringMagnet.rotation.z-=Math.PI/180*Math.pow(2.7, titaline)*Math.cos(t/1000);
+    // ringMagnet.rotation.z-=Math.PI/180*Math.pow(2.7, titaline)*Math.cos(t/1000);
+    if(choice=="barmagnet"){
+         bar.rotation.y-=Math.PI/180*Math.pow(2.7, titaline)*Math.cos(t/1000);
+    }
+    else if(choice=="horseshoemagnet"){
+        tita = -0.05*(t/1000);
+         horseShoeMagnet.rotation.y+=Math.PI/180*Math.pow(2.7, tita)*Math.cos(t/1000);
+         horseShoeMagnet.rotation.z-=Math.PI/1000*Math.pow(2.7, titaline)*Math.cos(t/1000);
+    }
+    else if(choice=="buttonmagnet"){
+        buttonMagnet.rotation.z-=Math.PI/180*Math.pow(2.7, titaline)*Math.cos(t/1000);
+    }  
+    else if(choice=="ringmagnet"){
+        ringMagnet.rotation.z-=Math.PI/180*Math.pow(2.7, titaline)*Math.cos(t/1000);
+    }
+
+
     PIEshowInputPanel();
 
 
@@ -2350,6 +2500,8 @@ function updateExperimentElements(t, dt) {
     // PIEcamera.rotation.x-=Math.PI/1800;
     // PIEcamera.rotation.y-=Math.PI/1800;
     // PIEcamera.rotation.z-=Math.PI/1800;
+
+    }
 }
 
 
