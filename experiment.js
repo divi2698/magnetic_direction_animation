@@ -46,20 +46,15 @@ var choice;
 var hasChosen=0;
 function initialiseHelp() {
     helpContent = "";
-    helpContent = helpContent + "<h2>Magnetic field due to a current carrying circular loop help</h2>";
+    helpContent = helpContent + "<h2>Magnetic Direction help</h2>";
     helpContent = helpContent + "<h3>About the experiment</h3>";
-    helpContent = helpContent + "<p>Shown how the deflection changes with direction and strength of the current.</p>";
-    helpContent = helpContent + "<p>When the switch is closed, there is deflection in the compass according to the direction and strength of the current.</p>"
+    helpContent = helpContent + "<p>Shown how the freely suspended magnet points itself to earth's geometric north.</p>";
     helpContent = helpContent + "<h3>Animation control</h3>";
-    helpContent = helpContent + "<p>Select voltage of a cell through slider.</p>";
-    helpContent = helpContent + "<p>Select the direction of the current using checkboxes.</p>";
-    helpContent = helpContent + "<p>Drag the compass to set its position.</p>";
-    helpContent = helpContent + "<p>Drag the coil to set its position.</p>";
-    helpContent = helpContent + "<p>Click on start button to start the animation</p>";
-    helpContent = helpContent + "<p>Alternatively, click on the swith to start the animation</p>";
-    helpContent = helpContent + "<p>Click on pause button to pause the animation</p>";
-    helpContent = helpContent + "<p>Click on Reset button to reset animation</p>";
-    helpContent = helpContent + "<p>Click on start button and then drag to view a 360 degree view and scroll to zoom</p>";
+    helpContent = helpContent + "<p>Select shape of the magnet.</p>";
+    helpContent = helpContent + "<p>Click on start button to push(rotate) the selected magnet.</p>";
+    helpContent = helpContent + "<p>Click on pause button to pause the animation.</p>";
+    helpContent = helpContent + "<p>Click on stop button to set the selected magnet to its original position.</p>";
+    helpContent = helpContent + "<p>Click on Reset button to reset animation.</p>";
     infoContent = infoContent + "<h2>Happy Experimenting</h2>";
     PIEupdateHelp(helpContent);
 }
@@ -67,15 +62,14 @@ function initialiseHelp() {
 var infoContent;
 function initialiseInfo() {
     infoContent = "";
-    infoContent = infoContent + "<h2>Magnetic field due to a current carrying circular loop concepts</h2>";
+    infoContent = infoContent + "<h2>Magnetic Direction concepts</h2>";
     infoContent = infoContent + "<h3>About the experiment</h3>";
-    infoContent = infoContent + "<p>Shown how the deflection changes with direction and strength of the current.</p>";
-    infoContent = infoContent + "<p>When the switch is closed, there is deflection in the compass according to the direction and strength of the current.</p>";
-    infoContent = infoContent + "<h3>Current Flow</h3>";
-    infoContent = infoContent + "<p>According to the Fleming's Right hand rule of finding magnetic direction, if the current's direction is clockwise, the needle deflects to the right and left otherwise </p>";
-    infoContent = infoContent + "<p>Needle of compass aligns itself to the tangent to the magnetic field lines</p>";
-    infoContent = infoContent + "<p>Also since force on needle is directly propotional to the current, there is more deflection when voltage is high.</p>";
-    infoContent = infoContent + "<p>If the compass is moved far from the rod, where there is no magnetic field, then there is no deflection in compass.</p>";
+    helpContent = helpContent + "<p>Shown how the freely suspended magnet points itself to earth's geometric north.</p>";
+    infoContent = infoContent + "<p>When the start button is clicked, the magnet starts rotating.</p>";
+    infoContent = infoContent + "<p>The magnet's north pole is attracted by the earth's magnetic south pole. </p>";
+    infoContent = infoContent + "<p>The magnet's south pole is attracted by the earth's magnetic north pole. </p>";
+    infoContent = infoContent + "<p>As the earth's magnetic south pole is situated at earth's geometric north, therefore the magnet slowly aligns itself in the direction of earth's geometric north and hence points towards the true north.</p>";
+    infoContent = infoContent + "<p>The same concept is used in compass where the magnetic needle points towards the true north.</p>";
     infoContent = infoContent + "<h2>Happy Experimenting</h2>";
     PIEupdateInfo(infoContent);
 }
@@ -1135,6 +1129,7 @@ var horseShoeMagnet;
 var sphere1;
 var dummy2;
 var cube1;
+var h;
 function addHorseShoeMagnet(){
 
     // var baseGeom = new THREE.BoxGeometry(1, .3, .6);
@@ -1180,7 +1175,12 @@ function addHorseShoeMagnet(){
     // cube1.position.z = - 5;
     // dummy2.add(cube1);
 
+     var lampBulbGeom = new THREE.BoxGeometry(10, 10, 10);
+    
+        h = new THREE.Mesh(lampBulbGeom, new THREE.MeshPhongMaterial({ color: 0xffffff, transparent: true, opacity: 0 }));
 
+        h.position.set(0, 0, 0);
+        
 
     var curve2 = new THREE.CubicBezierCurve3(
     new THREE.Vector3(0, 0 ,0),
@@ -1197,10 +1197,13 @@ function addHorseShoeMagnet(){
 
     // horseShoeMagnet.position.x= 0;
     // 
-    horseShoeMagnet.position.set(-.6,-1.8,2);
-    horseShoeMagnet.rotation.x=-Math.PI/6;
-    horseShoeMagnet.rotation.y=Math.PI/6;
+    // horseShoeMagnet.position.set(-.6,-1.8,2);
+    // horseShoeMagnet.rotation.x=-Math.PI/6;
+    // horseShoeMagnet.rotation.y=Math.PI/6;
     horseShoeMagnet.add(line);
+    h.add(horseShoeMagnet);
+    h.rotation.x=-Math.PI/6+Math.PI/6;
+    // h.rotation.y=Math.PI/6;
 
     // tube2.applyMatrix( new THREE.Matrix4().makeTranslation(0, 10, 0) );
     // dummy2.add(horseShoeMagnet);
@@ -1380,7 +1383,8 @@ function addHorseShoeMagnet(){
 
 function showHorseShoeMagnet(){
 
-    PIEaddElement(horseShoeMagnet); 
+    // PIEaddElement(horseShoeMagnet); 
+    PIEaddElement(h);
 }
 
 
@@ -2342,13 +2346,13 @@ var flag3=1;
 var flag4=1;
 
 function chooseBarMagnet(){
-    if(flag1=1){
+    if(flag1==1){
     flag1=0;
     flag2=1;
     flag3=1;
     flag4=1;
    stopAnimation();
-   removePrevMagnets();
+    removePrevMagnets();
     PIEchangeInputCheckbox("Bar Magnet",true);
     PIEchangeInputCheckbox("Button Magnet",false);
     PIEchangeInputCheckbox("Ring Magnet",false);
@@ -2362,7 +2366,7 @@ function chooseBarMagnet(){
 }
 function chooseHsMagnet(){
 
-   if(flag2=1){
+   if(flag2==1){
     flag1=1;
     flag2=0;
     flag3=1;
@@ -2381,7 +2385,7 @@ function chooseHsMagnet(){
 }
 function chooseButtonMagnet(){
 
-   if(flag3=1){
+   if(flag3==1){
     flag1=1;
     flag2=1;
     flag3=0;
@@ -2400,7 +2404,7 @@ function chooseButtonMagnet(){
 }
 function chooseRingMagnet(){
 
-   if(flag4=1){
+   if(flag4==1){
     flag1=1;
     flag2=1;
     flag3=1;
@@ -2423,7 +2427,7 @@ function chooseRingMagnet(){
 function removePrevMagnets(){
 
     PIEremoveElement(bar);
-    PIEremoveElement(horseShoeMagnet);
+    PIEremoveElement(h);
     PIEremoveElement(ringMagnet);
     PIEremoveElement(buttonMagnet);
     PIErender();
@@ -2479,8 +2483,9 @@ function updateExperimentElements(t, dt) {
     }
     else if(choice=="horseshoemagnet"){
         tita = -0.05*(t/1000);
-         horseShoeMagnet.rotation.y+=Math.PI/180*Math.pow(2.7, tita)*Math.cos(t/1000);
-         horseShoeMagnet.rotation.z-=Math.PI/1000*Math.pow(2.7, titaline)*Math.cos(t/1000);
+         h.rotation.y+=Math.PI/180*Math.pow(2.7, tita)*Math.cos(t/1000);
+         h.rotation.z-=Math.PI/1000*Math.pow(2.7, titaline)*Math.cos(t/1000);
+         h.rotation.x-=Math.PI/2000*Math.pow(2.7, titaline)*Math.cos(t/1000);
     }
     else if(choice=="buttonmagnet"){
         buttonMagnet.rotation.z-=Math.PI/180*Math.pow(2.7, titaline)*Math.cos(t/1000);
@@ -2527,21 +2532,3 @@ function PIEremoveElement(b) {
     }
 }
 
-function removeElements(){
-    // alert("im in remove elem");
-    PIEremoveElement(box1);
-    PIEremoveElement(box2);
-    PIEremoveElement(box3);
-    PIEremoveElement(mesh1);
-    PIEremoveElement(mesh2);
-    PIEremoveElement(mesh3);
-    PIEremoveElement(mesh4);
-    PIEremoveElement(mesh5);
-    PIEremoveElement(mesh6);
-    PIEremoveElement(mesh7);
-    PIEremoveElement(mesh8);
-    PIEremoveElement(mesh9);
-    PIEremoveElement(mesh10);
-    PIEremoveElement(mesh11);
-    PIEremoveElement(mesh12);
-}
