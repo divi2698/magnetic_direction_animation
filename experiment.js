@@ -1076,10 +1076,23 @@ function addRod() {
 
       var lampBulbGeom = new THREE.BoxGeometry(12, .1, .1);
     
-        line2 = new THREE.Mesh(lampBulbGeom, new THREE.MeshPhongMaterial({ color: 0xffffff, transparent: true, opacity: 0.4,color:"blue" }));
+        line2 = new THREE.Mesh(lampBulbGeom, new THREE.MeshPhongMaterial({ color: 0xffffff, transparent: true, opacity: 0.4,color:0x0d979b }));
 
         line2.position.set(0,2 ,10);
         tableTop.add(line2);
+
+
+     var lampBulbGeom2 = new THREE.BoxGeometry(5, .1, .1);
+    
+        line3 = new THREE.Mesh(lampBulbGeom2, new THREE.MeshPhongMaterial({ color: 0xffffff, transparent: true, opacity: 0.4,color:0x0d979b }));
+
+        line3.position.set(0,2 ,10);
+        tableTop.add(line3);
+
+
+
+
+
 
         var geometry = new THREE.ConeGeometry( .1, .5, 30 );
         var material = new THREE.MeshBasicMaterial( {color: 0xff0000} );
@@ -1101,9 +1114,9 @@ function addRod() {
         
 
         var edges = new THREE.EdgesGeometry( geometry2 );
-        var line56 = new THREE.LineSegments( edges, new THREE.LineBasicMaterial( { color: "red" } ) );
+        var line57 = new THREE.LineSegments( edges, new THREE.LineBasicMaterial( { color: "red" } ) );
 
-        cone2.add(line56);
+        cone2.add(line57);
         cone2.rotation.z=Math.PI/2;
         cone2.rotation.z=Math.PI+Math.PI/2;
         cone2.position.set(6,0,0);
@@ -1111,8 +1124,56 @@ function addRod() {
         line2.add( cone2 );
 
 
+
+
+
+
+        var geometry3 = new THREE.ConeGeometry( .1, .5, 30 );
+        var material3 = new THREE.MeshBasicMaterial( {color: 0xff0000} );
+        var cone3 = new THREE.Mesh( geometry3, material3 );
+        
+
+        var edges = new THREE.EdgesGeometry( geometry3 );
+        var line55 = new THREE.LineSegments( edges, new THREE.LineBasicMaterial( { color: "red" } ) );
+
+        cone3.add(line55);
+        cone3.rotation.z=Math.PI/2;
+        cone3.position.set(-2.5,0,0);
+
+        line3.add( cone3 );
+
+        var geometry4 = new THREE.ConeGeometry( .1, .5, 30 );
+        var material4 = new THREE.MeshBasicMaterial( {color: 0xff0000} );
+        var cone4 = new THREE.Mesh( geometry4, material4 );
+        
+
+        var edges = new THREE.EdgesGeometry( geometry4 );
+        var line58 = new THREE.LineSegments( edges, new THREE.LineBasicMaterial( { color: "red" } ) );
+
+        cone4.add(line58);
+        cone4.rotation.z=Math.PI/2;
+        cone4.rotation.z=Math.PI+Math.PI/2;
+        cone4.position.set(2.5,0,0);
+
+        line3.add( cone4 );
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 // line2.rotation.x=-Math.PI/6;
-    line2.rotation.y=Math.PI/6;
+        line2.rotation.y=Math.PI/6;
+        line3.rotation.y=Math.PI/6+Math.PI/2;
 
 
 
@@ -1162,6 +1223,60 @@ function addRod() {
                 // thevel1.rotation.x = -Math.PI/2 ;
                 // thevel55.rotation.y = -Math.PI/4 ;
                 line2.add(thevel56);
+                // base5.rotation.y=Math.PI;
+                // PIEaddElement(thevel1);
+
+            
+
+
+        });
+
+            var loader = new THREE.FontLoader();
+            loader.load("./optimer.json", function (response) {
+                font = response;
+
+                var geometry = new THREE.TextGeometry("E", {
+                    font: font,
+                    size:.3,
+                    height: .02,
+                    curveSegments: 3
+                });
+
+                var thevel57 = new THREE.Mesh(geometry, new THREE.MeshBasicMaterial({ color: 0xfff }));
+
+
+                thevel57.position.set(2.5, .3, 0);
+                thevel57.rotation.y=Math.PI;
+                // thevel1.rotation.x = -Math.PI/2 ;
+                // thevel55.rotation.y = -Math.PI/4 ;
+                line3.add(thevel57);
+                // base5.rotation.y=Math.PI;
+                // PIEaddElement(thevel1);
+
+            
+
+
+        });
+
+            var loader = new THREE.FontLoader();
+            loader.load("./optimer.json", function (response) {
+                font = response;
+
+                var geometry = new THREE.TextGeometry("W", {
+                    font: font,
+                    size:.3,
+                    height: .02,
+                    curveSegments: 3
+                });
+
+                var thevel58 = new THREE.Mesh(geometry, new THREE.MeshBasicMaterial({ color: 0xfff }));
+
+
+                thevel58.position.set(-2.5, .3, 0);
+                thevel58.rotation.y=Math.PI;
+                // thevel1.rotation.x = -Math.PI/2 ;
+                // thevel55.rotation.y = -Math.PI/4 ;
+                line3.add(thevel58);
                 // base5.rotation.y=Math.PI;
                 // PIEaddElement(thevel1);
 
