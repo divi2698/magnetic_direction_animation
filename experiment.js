@@ -1983,11 +1983,11 @@ function stopAnimation() {
     console.log("at end stop anim");
     choice=0;
     hasChosen=0;
-    removePrevMagnets();
-    PIEchangeInputCheckbox("Bar Magnet",false);
-    PIEchangeInputCheckbox("Button Magnet",false);
-    PIEchangeInputCheckbox("Ring Magnet",false);
-    PIEchangeInputCheckbox("Horse Shoe Magnet",false);
+    
+    // PIEchangeInputCheckbox("Bar Magnet",false);
+    // PIEchangeInputCheckbox("Button Magnet",false);
+    // PIEchangeInputCheckbox("Ring Magnet",false);
+    // PIEchangeInputCheckbox("Horse Shoe Magnet",false);
 
     flag1=1;
     flag2=1;
@@ -2010,8 +2010,8 @@ function stopAnimation() {
         ringMagnet.rotation.z=-Math.PI/6+Math.PI;
 
         buttonMagnet.position.set(.2, .5, 2);
-    buttonMagnet.rotation.x=-Math.PI/2-Math.PI/6;
-    buttonMagnet.rotation.z=-Math.PI/6+Math.PI;
+        buttonMagnet.rotation.x=-Math.PI/2-Math.PI/6;
+        buttonMagnet.rotation.z=-Math.PI/6+Math.PI;
 
 
 
@@ -2348,6 +2348,7 @@ function chooseBarMagnet(){
     flag3=1;
     flag4=1;
    stopAnimation();
+   removePrevMagnets();
     PIEchangeInputCheckbox("Bar Magnet",true);
     PIEchangeInputCheckbox("Button Magnet",false);
     PIEchangeInputCheckbox("Ring Magnet",false);
@@ -2367,6 +2368,7 @@ function chooseHsMagnet(){
     flag3=1;
     flag4=1;
    stopAnimation();
+   removePrevMagnets();
     PIEchangeInputCheckbox("Bar Magnet",false);
     PIEchangeInputCheckbox("Button Magnet",false);
     PIEchangeInputCheckbox("Ring Magnet",false);
@@ -2385,6 +2387,7 @@ function chooseButtonMagnet(){
     flag3=0;
     flag4=1;
    stopAnimation();
+   removePrevMagnets();
     PIEchangeInputCheckbox("Bar Magnet",false);
     PIEchangeInputCheckbox("Button Magnet",true);
     PIEchangeInputCheckbox("Ring Magnet",false);
@@ -2403,6 +2406,7 @@ function chooseRingMagnet(){
     flag3=1;
     flag4=0;
    stopAnimation();
+   removePrevMagnets();
     PIEchangeInputCheckbox("Bar Magnet",false);
     PIEchangeInputCheckbox("Button Magnet",false);
     PIEchangeInputCheckbox("Ring Magnet",true);
