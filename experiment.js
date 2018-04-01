@@ -641,11 +641,13 @@ function addCurvedWire(){
 }
 
 //////////////////////////////////////////////////////////////////
+var tableTop;
 function addTable() {
     var tableGeom = new THREE.BoxGeometry(20, 0.5, 20, 4, 4, 1);
-    var tableTop = new THREE.Mesh(tableGeom, new THREE.MeshBasicMaterial({ color: 0x8B4513 }));
-    tableTop.position.y -= 0.8;
-    // PIEaddElement(tableTop); //top of table
+    tableTop = new THREE.Mesh(tableGeom, new THREE.MeshBasicMaterial({ color: 0x8B4513 }));
+    tableTop.position.y -= 7;
+    PIEaddElement(tableTop);
+    tableTop.rotation.x=-Math.PI/6; //top of table
 
     var edges = new THREE.EdgesGeometry(tableGeom);
     var line = new THREE.LineSegments(edges, new THREE.LineBasicMaterial({ color: 0x000 }));
@@ -978,17 +980,19 @@ function addRod() {
     var line = new THREE.LineSegments(edges, new THREE.LineBasicMaterial({ color: 0x000 }));
 
     base.add(line);
+    tableTop.add(base);
 
     // base.rotation.y += Math.PI / 6;
-    base.position.set(-6,0,2);
-    PIEaddElement(base); //base of switch
+    base.position.set(-5,0.8,2);
+    
+    // PIEaddElement(base); //base of switch
 
-    var rodGeom = new THREE.BoxGeometry( .4, 10,.4);
+    var rodGeom = new THREE.BoxGeometry( .4, 14,.4);
     var rodTop =  new THREE.Mesh( rodGeom,new THREE.MeshBasicMaterial({color: 0xa8835a }));
     // rodTop.position.y +=1.6;
     // rodTop.position.z +=4.5;
     // rodTop.position.x +=1.55;
-    rodTop.position.set(0,2.68,0);
+    rodTop.position.set(0,5,0);
     base.add(rodTop); //for making a rod
 
     rodTop.castShadow = true; //default is false
@@ -1007,7 +1011,7 @@ function addRod() {
     // rodTop.position.x +=1.55;
    
     rodTop.add(horRod);
-    horRod.position.set(1.7,4.2,0);
+    horRod.position.set(1.7,6,0);
      //for making a rod
 
     horRod.castShadow = true; //default is false
@@ -1044,14 +1048,48 @@ function addRod() {
 
     horRod.add(mesh1); 
 
+var geometry = new THREE.Geometry();
+geometry.vertices.push(new THREE.Vector3( -9, -3.5, 2) );
+geometry.vertices.push(new THREE.Vector3( 0, -3.5, 2) );
+geometry.vertices.push(new THREE.Vector3( 4, -3.5, 2) );
+
+var material = new THREE.LineDashedMaterial( {
+    color: 0xffffff,
+    linewidth: 5,
+    scale: 5,
+    dashSize: 1,
+    gapSize: 2,
+} );
+
+
+// var line2 = new THREE.Line( geometry, material );
+// PIEaddElement(line2);
+// line2.rotation.x=-Math.PI/6;
+// line2.rotation.y=Math.PI/6;
+
+//    var arrow1 = new THREE.Mesh(new THREE.CylinderGeometry(0.035, 0.035, 0.45, 32), new THREE.MeshBasicMaterial({ color: "red" }));
+//     PIEaddElement(arrow1);
+//     arrow1.position.set(-8, -3.8, 2);
+//     // arrow1.rotation.y -= 0.3;
+//     // arrow1.rotation.z += 1.2;
+// arrow1.rotation.x=-Math.PI/6;
+// arrow1.rotation.y=Math.PI/6;
+
+//     var arrow1A = new THREE.Mesh(new THREE.tubeGeometry(0.035, 0.035, 0.45, 32), new THREE.MeshBasicMaterial({ color: "red" }));
+//     PIEaddElement(arrow1A);
+//     arrow1A.position.set(-8, -3.8, 2);
+//     // arrow1A.rotation.y += 0.3;
+//     arrow1A.rotation.x += 0.3;
+    // arrow1A.rotation.z -= 1.2;
+
     // addHorseShoeMagnet();
     // showBarMagnet();
     // addRingMagnet();
     // addButtonMagnet();
      // showHorseShoeMagnet();
     // showBarMagnet();
-    // showRingMagnet();
-    showButtonMagnet();
+    showRingMagnet();
+    // showButtonMagnet();
 
 
     // rodTop.rotation.x +=Math.PI/2;
@@ -1092,8 +1130,55 @@ function addRod() {
 
 
 var horseShoeMagnet;
-
+var sphere1;
+var dummy2;
+var cube1;
 function addHorseShoeMagnet(){
+
+    // var baseGeom = new THREE.BoxGeometry(1, .3, .6);
+    //     sphere1 = new THREE.Mesh(baseGeom, new THREE.MeshBasicMaterial({/*color: 0xd3d3d3*/color: "yellow" }));
+
+    //     var edges = new THREE.EdgesGeometry(baseGeom);
+    //     var line = new THREE.LineSegments(edges, new THREE.LineBasicMaterial({ color: 0x8B0000 }));
+
+    //     sphere1.add(line);
+
+
+    //     sphere1.position.set(0,0,0); 
+
+    // var material = new THREE.LineBasicMaterial( { color: 0x000000 } );
+    // var geometry = new THREE.Geometry();
+    // geometry.vertices.push(new THREE.Vector3( 0, 5.2, 0) );
+    // // geometry.vertices.push(new THREE.Vector3( 0, 10, 0) );
+    // geometry.vertices.push(new THREE.Vector3( 0, 0, 0) );
+    // // geometry.translate(0,-5,0);
+
+    // line= new THREE.Line( geometry, material );
+    // // line.rotation.z=Math.PI;
+    // line.position.y=5.2;
+    // line.rotation.z=Math.PI;
+    
+//     var axesHelper = new THREE.AxesHelper( 5 );
+// PIEscene.add( axesHelper );
+    
+
+    dummy2 = new THREE.Object3D();
+    // dummy2.position.x = 7;
+    // dummy2.position.z = 5;
+    PIEaddElement( dummy2 );
+    dummy2.position.set(0,0,0);
+
+// var g=new THREE.BoxGeometry( 1, 1, 1);
+//     cube1 = new THREE.Mesh( g, new THREE.MeshBasicMaterial({color:"yellow"}) );
+//     var edges = new THREE.EdgesGeometry( g );
+//     var line = new THREE.LineSegments( edges, new THREE.LineBasicMaterial( { color: 0x8B0000 } ) );
+//     cube1.add(line);
+
+    
+    // cube1.position.z = - 5;
+    // dummy2.add(cube1);
+
+
 
     var curve2 = new THREE.CubicBezierCurve3(
     new THREE.Vector3(0, 0 ,0),
@@ -1108,10 +1193,27 @@ function addHorseShoeMagnet(){
     var edges = new THREE.EdgesGeometry( tube2 );
     var line = new THREE.LineSegments( edges, new THREE.LineBasicMaterial( { color: 0x8B0000 } ) );
 
-    
+    // horseShoeMagnet.position.x= 0;
+    // 
+    horseShoeMagnet.position.set(-.6,-1.8,2);
+    horseShoeMagnet.rotation.x=-Math.PI/6;
+    horseShoeMagnet.rotation.y=Math.PI/6;
     horseShoeMagnet.add(line);
+
+    // tube2.applyMatrix( new THREE.Matrix4().makeTranslation(0, 10, 0) );
+    // dummy2.add(horseShoeMagnet);
+   // var a= horseShoeMagnet.getcenter;
+   // console.log(a);
+
     // horseShoeMagnet.rotation.y=Math.PI; 
-    horseShoeMagnet.position.set(0,2,0); 
+    
+    // tube2.translate(1,4,0);
+    // horseShoeMagnet.position.set(1,4,0); 
+
+    // sphere1.add(horseShoeMagnet);
+    // sphere1.position.set(1,3,0);
+
+    // PIEaddElement(horseShoeMagnet);
 
     //================Pole 1====================//
 
@@ -1281,9 +1383,17 @@ function showHorseShoeMagnet(){
 
 
 var base5;
+var bar;
 
 function addBarMagnet(){
 
+
+           var lampBulbGeom = new THREE.BoxGeometry(2, .3, .6);
+    
+        bar = new THREE.Mesh(lampBulbGeom, new THREE.MeshPhongMaterial({ color: 0xffffff, transparent: true, opacity: 0 }));
+
+        bar.position.set(.3, 0, 0);
+        
         //North pole
         var baseGeom = new THREE.BoxGeometry(1, .3, .6);
         base5 = new THREE.Mesh(baseGeom, new THREE.MeshBasicMaterial({/*color: 0xd3d3d3*/color: "red" }));
@@ -1294,7 +1404,13 @@ function addBarMagnet(){
         base5.add(line);
 
 
-        base5.position.set(0,0,0); 
+        base5.position.set(-.5,0,0); 
+        bar.add(base5);
+        // bar.rotation.x=-Math.PI/6-Math.PI/2;
+         bar.rotation.y=Math.PI/6;
+         // base5.rotation.x=Math.PI/6;
+         // base5.rotation.x=-Math.PI;
+         // base5.rotation.y=Math.PI/6;
 
         //south pole
         var baseGeom = new THREE.BoxGeometry(1, .32, .6);
@@ -1310,7 +1426,7 @@ function addBarMagnet(){
 
         base5.add(base6);
         // base5.rotation.x=Math.PI/2;
-
+// 
 
 
         // PIEaddElement(base5);
@@ -1356,7 +1472,7 @@ function addBarMagnet(){
                 var thevel2 = new THREE.Mesh(geometry, new THREE.MeshBasicMaterial({ color: 0xffffff }));
 
 
-                thevel2.position.set(-.15, -.04, 0.15);
+                thevel2.position.set(-.15, -.02, 0.15);
                 thevel2.rotation.x = -Math.PI / 2;
                 base6.add(thevel2);
                 // base5.rotation.x=Math.PI;
@@ -1416,7 +1532,7 @@ function addBarMagnet(){
 
         });
 
-           base5.rotation.x=Math.PI;
+           // base5.rotation.x=Math.PI;
 
 
 }
@@ -1425,7 +1541,8 @@ function addBarMagnet(){
 function showBarMagnet()
 {
     // console.log(base5);
-    PIEaddElement(base5);
+    // PIEaddElement(base5);
+    PIEaddElement(bar);
 
 }
 
@@ -1443,7 +1560,10 @@ function addButtonMagnet(){
     var line = new THREE.LineSegments(edges, new THREE.LineBasicMaterial({ color: "black" }));
 
     buttonMagnet.add(line);
-    buttonMagnet.position.set(-3, 0.8, -3);
+    buttonMagnet.position.set(.2, .5, 2);
+
+    buttonMagnet.rotation.x=-Math.PI/2-Math.PI/6;
+    buttonMagnet.rotation.z=-Math.PI/6+Math.PI;
  
      //add text of north and south poles
 
@@ -1516,7 +1636,10 @@ function addRingMagnet(){
     var line = new THREE.LineSegments(edges, new THREE.LineBasicMaterial({ color: "gray" }));
 
     ringMagnet.add(line);
-    ringMagnet.position.set(-3, 0.8, 7);
+    ringMagnet.position.set(.2, .5, 2);
+
+    ringMagnet.rotation.x=-Math.PI/2-Math.PI/6;
+    ringMagnet.rotation.z=-Math.PI/6+Math.PI;
     // buttonMagnet.rotation.x=Math.PI/4;
 
 
@@ -1605,7 +1728,7 @@ function addRingMagnet(){
 
 
     // PIEaddElement(ringMagnet);
-        ringMagnet.rotation.x=Math.PI/2;
+        // ringMagnet.rotation.x=Math.PI/2;
 
 
         
@@ -1630,38 +1753,38 @@ function addString(){
     torusKnot.rotation.y=Math.PI/6;
     meshS.add(torusKnot );
 
+// how to rotate an object around the different point here its 5.2, 0, 0
+    dummy = new THREE.Object3D();
 
-    var dummy = new THREE.Object3D();
-
-    var material = new THREE.LineBasicMaterial( { color: 0x0000ff } );
+    var material = new THREE.LineBasicMaterial( { color: 0x000000 } );
     var geometry = new THREE.Geometry();
-    geometry.vertices.push(new THREE.Vector3( 0, 5, 0) );
+    geometry.vertices.push(new THREE.Vector3( -0.3, 5.4, 0) );
     // geometry.vertices.push(new THREE.Vector3( 0, 10, 0) );
-    geometry.vertices.push(new THREE.Vector3( 0, 0, 0) );
+    geometry.vertices.push(new THREE.Vector3( -0.3, 0, 0) );
     // geometry.translate(0,-5,0);
 
     line= new THREE.Line( geometry, material );
     // line.rotation.z=Math.PI;
-    line.position.y=5;
+    line.position.y=5.4;
     line.rotation.z=Math.PI;
-    line
+    
     dummy.add(line);
     PIEaddElement(dummy);
 
     // meshS.add(line);
     
 
-    var cuboidOrange = new THREE.Mesh(new THREE.BoxGeometry(.1, .1, .1, 4, 4, 1), new THREE.MeshBasicMaterial({ color: "white" }));
-    cuboidOrange.position.set(0, 0, 0);
-    PIEaddElement(cuboidOrange);//battery
+    // var cuboidOrange = new THREE.Mesh(new THREE.BoxGeometry(.1, .1, .1, 4, 4, 1), new THREE.MeshBasicMaterial({ color: "white" }));
+    // cuboidOrange.position.set(0, 0, 0);
+    // PIEaddElement(cuboidOrange);//battery
 
-    var cuboidOrange1 = new THREE.Mesh(new THREE.BoxGeometry(.1, .1, .1, 4, 4, 1), new THREE.MeshBasicMaterial({ color: "white" }));
-    cuboidOrange1.position.set(0, 5, 0);
-    PIEaddElement(cuboidOrange1);//battery
+    // var cuboidOrange1 = new THREE.Mesh(new THREE.BoxGeometry(.1, .1, .1, 4, 4, 1), new THREE.MeshBasicMaterial({ color: "white" }));
+    // cuboidOrange1.position.set(0, 5, 0);
+    // PIEaddElement(cuboidOrange1);//battery
 
-    var cuboidOrange2 = new THREE.Mesh(new THREE.BoxGeometry(.1, .1, .1, 4, 4, 1), new THREE.MeshBasicMaterial({ color: "white" }));
-    cuboidOrange2.position.set(0, -5, 0);
-    PIEaddElement(cuboidOrange2);//battery
+    // var cuboidOrange2 = new THREE.Mesh(new THREE.BoxGeometry(.1, .1, .1, 4, 4, 1), new THREE.MeshBasicMaterial({ color: "white" }));
+    // cuboidOrange2.position.set(0, -5, 0);
+    // PIEaddElement(cuboidOrange2);//battery
 
 
     // line.rotation.z=Math.PI;
@@ -2195,15 +2318,35 @@ function resetExperiment() {
     // checkClock();
 
 }
+
+
+
+
 var tita;
+var titaline;
 
 function updateExperimentElements(t, dt) {
-    // tita = -0.05*(t/1000);
+    tita = -0.05*(t/1000);
     // horseShoeMagnet.rotation.y+=Math.PI/180*Math.pow(2.7, tita)*Math.cos(t/1000);
-    buttonMagnet.rotation.y+=Math.PI/180;
-    // base.rotation.x-=Math.PI/1800;
-    line.rotation.z+=Math.PI/1800;
+
+    titaline = -0.05*(t/1000);
+    // line.rotation.z-=Math.PI/2800*Math.pow(2.7, titaline)*Math.cos(t/1000);
+    // line.rotation.y-=Math.PI/150*Math.pow(2.7, titaline)*Math.cos(t/1000);
+    // horseShoeMagnet.rotation.z-=Math.PI/1000*Math.pow(2.7, titaline)*Math.cos(t/1000);
+    // bar.rotation.y-=Math.PI/180*Math.pow(2.7, titaline)*Math.cos(t/1000);
+    // buttonMagnet.rotation.z-=Math.PI/180*Math.pow(2.7, titaline)*Math.cos(t/1000);
+    ringMagnet.rotation.z-=Math.PI/180*Math.pow(2.7, titaline)*Math.cos(t/1000);
     PIEshowInputPanel();
+
+
+    // buttonMagnet.rotation.y+=Math.PI/180;
+    // horseShoeMagnet.rotation.y+=Math. PI/180;
+    // dummy2.rotation.y+=Math. PI/180;
+
+    // horseShoeMagnet.rotateOnAxis(new THREE.Vector3(0,1,0) , Math.PI/180);
+    // sphere1.rotation.y+=Math.PI/180;
+    // base.rotation.x-=Math.PI/1800;
+ 
     // PIEcamera.rotation.x-=Math.PI/1800;
     // PIEcamera.rotation.y-=Math.PI/1800;
     // PIEcamera.rotation.z-=Math.PI/1800;
