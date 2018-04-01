@@ -1044,24 +1044,132 @@ function addRod() {
 
     horRod.add(mesh1); 
 
-var geometry = new THREE.Geometry();
-geometry.vertices.push(new THREE.Vector3( -9, -3.5, 2) );
-geometry.vertices.push(new THREE.Vector3( 0, -3.5, 2) );
-geometry.vertices.push(new THREE.Vector3( 4, -3.5, 2) );
+// var geometry = new THREE.Geometry();
+// geometry.vertices.push(new THREE.Vector3( -4, 1, 20) );
+// geometry.vertices.push(new THREE.Vector3( 0, 1, 20) );
+// geometry.vertices.push(new THREE.Vector3( 1, 1, 20) );
 
-var material = new THREE.LineDashedMaterial( {
-    color: 0xffffff,
-    linewidth: 5,
-    scale: 5,
-    dashSize: 1,
-    gapSize: 2,
-} );
+// var material = new THREE.LineDashedMaterial( {
+//     color: 0xffffff,
+//     linewidth: 5,
+//     scale: 5,
+//     dashSize: 1,
+//     gapSize: 2,
+// } );
 
 
 // var line2 = new THREE.Line( geometry, material );
+// line2.position.set(0,0,0);
 // PIEaddElement(line2);
+
+    // var curve2 = new THREE.CubicBezierCurve3(
+    //     new THREE.Vector3(4.4, 0.8, 1.5),
+    //     new THREE.Vector3(4.6, 1.6, 1),
+    //     new THREE.Vector3(4.9, 1.3, 0.6),
+    //     new THREE.Vector3(5, 0.5, 0.6)
+    // );
+
+    // var tube2 = new THREE.TubeGeometry(curve2, 40, 0.05, 20, false);
+    // var mesh2 = new THREE.Mesh(tube2, new THREE.MeshBasicMaterial({ color: "black" }));
+
+    // PIEaddElement(mesh2); //curved wire connecting to black switch part
+
+      var lampBulbGeom = new THREE.BoxGeometry(12, .1, .1);
+    
+        line2 = new THREE.Mesh(lampBulbGeom, new THREE.MeshPhongMaterial({ color: 0xffffff, transparent: true, opacity: 0.4,color:"blue" }));
+
+        line2.position.set(0,2 ,10);
+        tableTop.add(line2);
+
+        var geometry = new THREE.ConeGeometry( .1, .5, 30 );
+        var material = new THREE.MeshBasicMaterial( {color: 0xff0000} );
+        var cone = new THREE.Mesh( geometry, material );
+        
+
+        var edges = new THREE.EdgesGeometry( geometry );
+        var line55 = new THREE.LineSegments( edges, new THREE.LineBasicMaterial( { color: "red" } ) );
+
+        cone.add(line55);
+        cone.rotation.z=Math.PI/2;
+        cone.position.set(-6,0,0);
+
+        line2.add( cone );
+
+        var geometry2 = new THREE.ConeGeometry( .1, .5, 30 );
+        var material2 = new THREE.MeshBasicMaterial( {color: 0xff0000} );
+        var cone2 = new THREE.Mesh( geometry2, material2 );
+        
+
+        var edges = new THREE.EdgesGeometry( geometry2 );
+        var line56 = new THREE.LineSegments( edges, new THREE.LineBasicMaterial( { color: "red" } ) );
+
+        cone2.add(line56);
+        cone2.rotation.z=Math.PI/2;
+        cone2.rotation.z=Math.PI+Math.PI/2;
+        cone2.position.set(6,0,0);
+
+        line2.add( cone2 );
+
+
 // line2.rotation.x=-Math.PI/6;
-// line2.rotation.y=Math.PI/6;
+    line2.rotation.y=Math.PI/6;
+
+
+
+
+            var loader = new THREE.FontLoader();
+            loader.load("./optimer.json", function (response) {
+                font = response;
+
+                var geometry = new THREE.TextGeometry("N", {
+                    font: font,
+                    size:.3,
+                    height: .02,
+                    curveSegments: 3
+                });
+
+                var thevel55 = new THREE.Mesh(geometry, new THREE.MeshBasicMaterial({ color: 0xfff }));
+
+
+                thevel55.position.set(-6, .3, 0);
+                // thevel1.rotation.x = -Math.PI/2 ;
+                // thevel55.rotation.y = -Math.PI/4 ;
+                line2.add(thevel55);
+                // base5.rotation.y=Math.PI;
+                // PIEaddElement(thevel1);
+
+            
+
+
+        });
+
+
+            var loader = new THREE.FontLoader();
+            loader.load("./optimer.json", function (response) {
+                font = response;
+
+                var geometry = new THREE.TextGeometry("S", {
+                    font: font,
+                    size:.3,
+                    height: .02,
+                    curveSegments: 3
+                });
+
+                var thevel56 = new THREE.Mesh(geometry, new THREE.MeshBasicMaterial({ color: 0xfff }));
+
+
+                thevel56.position.set(5.8, .3, 0);
+                // thevel1.rotation.x = -Math.PI/2 ;
+                // thevel55.rotation.y = -Math.PI/4 ;
+                line2.add(thevel56);
+                // base5.rotation.y=Math.PI;
+                // PIEaddElement(thevel1);
+
+            
+
+
+        });
+
 
 //    var arrow1 = new THREE.Mesh(new THREE.CylinderGeometry(0.035, 0.035, 0.45, 32), new THREE.MeshBasicMaterial({ color: "red" }));
 //     PIEaddElement(arrow1);
