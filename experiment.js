@@ -640,7 +640,7 @@ function addCurvedWire(){
 var tableTop;
 function addTable() {
     var tableGeom = new THREE.BoxGeometry(20, 0.5, 20, 4, 4, 1);
-    tableTop = new THREE.Mesh(tableGeom, new THREE.MeshBasicMaterial({ color: 0x8B4513 }));
+    tableTop = new THREE.Mesh(tableGeom, new THREE.MeshPhongMaterial({ color: 0x8B4513,specular:0x181201,shininess:100.0 }));
     tableTop.position.y -= 7;
     PIEaddElement(tableTop);
     tableTop.rotation.x=-Math.PI/6; //top of table
@@ -651,7 +651,7 @@ function addTable() {
     tableTop.add(line) //black line on the table;
 
     var tablelegGeom = new THREE.CubeGeometry(0.5, 10, 0.5, 4, 4, 1);
-    var tableleg = new THREE.Mesh(tablelegGeom, new THREE.MeshBasicMaterial({ color: 0x8B4513 }));
+    var tableleg = new THREE.Mesh(tablelegGeom, new THREE.MeshPhongMaterial({ color: 0x8B4513,specular:0x181201,shininess:100.0 }));
     tableleg.position.set(-9.5, -5, 9.5); //left leg of table
 
     var edges2 = new THREE.EdgesGeometry(tablelegGeom);
@@ -662,7 +662,7 @@ function addTable() {
 
 
     var tablelegGeom2 = new THREE.CubeGeometry(0.5, 10, 0.5, 4, 4, 1);
-    var tableleg2 = new THREE.Mesh(tablelegGeom2, new THREE.MeshBasicMaterial({ color: 0x8B4513 }));
+    var tableleg2 = new THREE.Mesh(tablelegGeom2, new THREE.MeshPhongMaterial({ color: 0x8B4513,specular:0x181201,shininess:100.0 }));
     tableleg2.position.set(9.5, -5, 9.5);
 
     var edges3 = new THREE.EdgesGeometry(tablelegGeom2);
@@ -673,7 +673,7 @@ function addTable() {
 
 
     var tablelegGeom3 = new THREE.CubeGeometry(0.5, 10, 0.5, 4, 4, 1);
-    var tableleg3 = new THREE.Mesh(tablelegGeom3, new THREE.MeshBasicMaterial({ color: 0x8B4513 }));
+    var tableleg3 = new THREE.Mesh(tablelegGeom3, new THREE.MeshPhongMaterial({ color: 0x8B4513,specular:0x181201,shininess:100.0 }));
     tableleg3.position.set(-9.5, -5, -9.5);
 
     var edges4 = new THREE.EdgesGeometry(tablelegGeom3);
@@ -684,7 +684,7 @@ function addTable() {
 
 
     var tablelegGeom4 = new THREE.CubeGeometry(0.5, 10, 0.5, 4, 4, 1);
-    var tableleg4 = new THREE.Mesh(tablelegGeom4, new THREE.MeshBasicMaterial({ color: 0x8B4513 }));
+    var tableleg4 = new THREE.Mesh(tablelegGeom4, new THREE.MeshPhongMaterial({ color: 0x8B4513,specular:0x181201,shininess:100.0 }));
     tableleg4.position.set(9.5, -5, -9.5);
 
     var edges5 = new THREE.EdgesGeometry(tablelegGeom4);
@@ -970,7 +970,7 @@ function addRod() {
    
 
     var baseGeom = new THREE.BoxGeometry(4, .3, 4);
-    base = new THREE.Mesh(baseGeom, new THREE.MeshBasicMaterial({/*color: 0xd3d3d3*/color: 0x2b1d0e }));
+    base = new THREE.Mesh(baseGeom, new THREE.MeshPhongMaterial({/*color: 0xd3d3d3*/color: 0x2b1d0e ,specular: 0x2b1d0e}));
 
     var edges = new THREE.EdgesGeometry(baseGeom);
     var line = new THREE.LineSegments(edges, new THREE.LineBasicMaterial({ color: 0x000 }));
@@ -1076,7 +1076,7 @@ function addRod() {
 
       var lampBulbGeom = new THREE.BoxGeometry(12, .1, .1);
     
-        line2 = new THREE.Mesh(lampBulbGeom, new THREE.MeshPhongMaterial({ color: 0xffffff, transparent: true, opacity: 0.4,color:0x0d979b }));
+        line2 = new THREE.Mesh(lampBulbGeom, new THREE.MeshPhongMaterial({ color: 0xffffff, transparent: true, opacity: 0.7,color:0x0d979b,specular: 0xffffff }));
 
         line2.position.set(0,2 ,10);
         tableTop.add(line2);
@@ -1084,7 +1084,7 @@ function addRod() {
 
      var lampBulbGeom2 = new THREE.BoxGeometry(5, .1, .1);
     
-        line3 = new THREE.Mesh(lampBulbGeom2, new THREE.MeshPhongMaterial({ color: 0xffffff, transparent: true, opacity: 0.4,color:0x0d979b }));
+        line3 = new THREE.Mesh(lampBulbGeom2, new THREE.MeshPhongMaterial({ color: 0xffffff, transparent: true, opacity: 0.7,color:0x0d979b,specular: 0xffffff }));
 
         line3.position.set(0,2 ,10);
         tableTop.add(line3);
@@ -1095,7 +1095,7 @@ function addRod() {
 
 
         var geometry = new THREE.ConeGeometry( .1, .5, 30 );
-        var material = new THREE.MeshBasicMaterial( {color: 0xff0000} );
+        var material = new THREE.MeshPhongMaterial( {color: 0xff0000,specular:0xffffff,shininess:100.0} );
         var cone = new THREE.Mesh( geometry, material );
         
 
@@ -1109,7 +1109,7 @@ function addRod() {
         line2.add( cone );
 
         var geometry2 = new THREE.ConeGeometry( .1, .5, 30 );
-        var material2 = new THREE.MeshBasicMaterial( {color: 0xff0000} );
+        var material2 = new THREE.MeshPhongMaterial( {color: 0xff0000,specular:0xffffff,shininess:100.0} );
         var cone2 = new THREE.Mesh( geometry2, material2 );
         
 
@@ -1129,7 +1129,7 @@ function addRod() {
 
 
         var geometry3 = new THREE.ConeGeometry( .1, .5, 30 );
-        var material3 = new THREE.MeshBasicMaterial( {color: 0xff0000} );
+        var material3 = new THREE.MeshPhongMaterial( {color: 0xff0000,specular:0xffffff,shininess:100.0} );
         var cone3 = new THREE.Mesh( geometry3, material3 );
         
 
@@ -1143,7 +1143,7 @@ function addRod() {
         line3.add( cone3 );
 
         var geometry4 = new THREE.ConeGeometry( .1, .5, 30 );
-        var material4 = new THREE.MeshBasicMaterial( {color: 0xff0000} );
+        var material4 = new THREE.MeshPhongMaterial( {color: 0xff0000,specular:0xffffff,shininess:100.0} );
         var cone4 = new THREE.Mesh( geometry4, material4 );
         
 
@@ -1345,6 +1345,8 @@ function addRod() {
     // squareMesh4.position.set(1, 14.6, 11.5);
     // squareMesh4.rotation.z += Math.PI / 2;
     // PIEaddElement(squareMesh4); //pink box
+
+    PIErender();
 }
 
 
