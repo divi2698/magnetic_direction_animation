@@ -111,7 +111,7 @@ function initialiseScene() {
     light.shadow.camera.near = 0.5;       // default
     light.shadow.camera.far = 500      // default
 
-    var groundMaterial = new THREE.MeshPhongMaterial({ color: 0x024406, specular: 0x111111 });
+    var groundMaterial = new THREE.MeshPhongMaterial({ color: 0x37e2c3, specular: 0xffffff });
     var mesh233 = new THREE.Mesh(new THREE.PlaneBufferGeometry(2000, 2000), groundMaterial);
     mesh233.position.y = -25;
     mesh233.rotation.x = - Math.PI / 2;
@@ -984,7 +984,7 @@ function addRod() {
     // PIEaddElement(base); //base of switch
 
     var rodGeom = new THREE.BoxGeometry( .4, 14,.4);
-    var rodTop =  new THREE.Mesh( rodGeom,new THREE.MeshBasicMaterial({color: 0xa8835a }));
+    var rodTop =  new THREE.Mesh( rodGeom,new THREE.MeshPhongMaterial({color: 0xa8835a,specular:0x675624 ,shininess:0.0 }));
     // rodTop.position.y +=1.6;
     // rodTop.position.z +=4.5;
     // rodTop.position.x +=1.55;
@@ -1001,7 +1001,7 @@ function addRod() {
     //=====================Horizontal rod================//
 
     var rodGeom = new THREE.BoxGeometry( 5, .4,.4);
-    var horRod =  new THREE.Mesh( rodGeom,new THREE.MeshBasicMaterial({color: 0xa8835a }));
+    var horRod =  new THREE.Mesh( rodGeom,new THREE.MeshPhongMaterial({color: 0xa8835a,specular:0x675624 ,shininess:0.0 }));
     // rodTop.position.y +=1.6;
     // rodTop.position.z +=4.5;
     // rodTop.position.x +=1.55;
@@ -1028,7 +1028,7 @@ function addRod() {
     );
 
     var tubeS = new THREE.TubeGeometry(curveS, 40, 0.07, 20, false);
-    meshS = new THREE.Mesh(tubeS, new THREE.MeshBasicMaterial({ color: "silver" }));
+    meshS = new THREE.Mesh(tubeS, new THREE.MeshPhongMaterial({ color: 0x061329, specular:0xffffff}));
 
     horRod.add(meshS);  
 
@@ -1040,7 +1040,7 @@ function addRod() {
     );
 
     var tube1 = new THREE.TubeGeometry(curve1, 40, 0.07, 20, false);
-    var mesh1 = new THREE.Mesh(tube1, new THREE.MeshBasicMaterial({ color: "silver" }));
+    var mesh1 = new THREE.Mesh(tube1, new THREE.MeshPhongMaterial({ color: 0x061329, specular:0xffffff}));
 
     horRod.add(mesh1); 
 
