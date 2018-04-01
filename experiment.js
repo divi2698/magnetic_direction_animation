@@ -1202,7 +1202,8 @@ function addHorseShoeMagnet(){
     // horseShoeMagnet.rotation.y=Math.PI/6;
     horseShoeMagnet.add(line);
     h.add(horseShoeMagnet);
-    h.rotation.x=-Math.PI/6+Math.PI/6;
+    h.rotation.x=-Math.PI/6+Math.PI/5;
+    h.rotation.z=-Math.PI/100;
     // h.rotation.y=Math.PI/6;
 
     // tube2.applyMatrix( new THREE.Matrix4().makeTranslation(0, 10, 0) );
