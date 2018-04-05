@@ -940,6 +940,7 @@ function mydragf2(element, newpos) {
 
     if (newpos.z < 4.5 - 2) {
         newpos.z = 4.5 - 2;
+        
     }
 
     if (newpos.z > 1.3 + 4.5) {
@@ -955,6 +956,8 @@ function mydragf2(element, newpos) {
     mydragf(meterTop, new THREE.Vector3(meterTop.position.x, meterTop.position.y, meterTop.position.z));
     PIErender();
 }
+
+
 /////////////////////////////////////////////////////////
 
 // var needprism1, needprism2;
@@ -970,7 +973,7 @@ function addRod() {
    
 
     var baseGeom = new THREE.BoxGeometry(4, .3, 4);
-    base = new THREE.Mesh(baseGeom, new THREE.MeshPhongMaterial({/*color: 0xd3d3d3*/color: 0x2b1d0e ,specular: 0x2b1d0e}));
+    base = new THREE.Mesh(baseGeom, new THREE.MeshPhongMaterial({       color: 0x2b1d0e ,specular: 0x2b1d0e}));
 
     var edges = new THREE.EdgesGeometry(baseGeom);
     var line = new THREE.LineSegments(edges, new THREE.LineBasicMaterial({ color: 0x000 }));
@@ -984,7 +987,7 @@ function addRod() {
     // PIEaddElement(base); //base of switch
 
     var rodGeom = new THREE.BoxGeometry( .4, 14,.4);
-    var rodTop =  new THREE.Mesh( rodGeom,new THREE.MeshPhongMaterial({color: 0xa8835a,specular:0x675624 ,shininess:0.0 }));
+    var rodTop =  new THREE.Mesh( rodGeom,new THREE.MeshPhongMaterial({color: 0xa8835a, specular:0x675624 ,shininess:0.0 }));
     // rodTop.position.y +=1.6;
     // rodTop.position.z +=4.5;
     // rodTop.position.x +=1.55;
@@ -1010,8 +1013,8 @@ function addRod() {
     horRod.position.set(1.7,6,0);
      //for making a rod
 
-    horRod.castShadow = true; //default is false
-    horRod.receiveShadow = true; //default
+    horRod.castShadow       = true; //default is false
+    horRod.receiveShadow    = true; //default
 
     var edges = new THREE.EdgesGeometry( rodGeom );
     var line = new THREE.LineSegments( edges, new THREE.LineBasicMaterial( { color: 0x000 } ) );
@@ -2211,8 +2214,7 @@ function stopAnimation() {
     
     PIErender();
     console.log("at end stop anim");
-    choice=0;
-    hasChosen=0;
+    hasChosen=1;
     
     // PIEchangeInputCheckbox("Bar Magnet",false);
     // PIEchangeInputCheckbox("Button Magnet",false);
@@ -2409,17 +2411,6 @@ function loadExperimentElements() {
     // PIEcamera.rotation.x=-Math.PI/2
 
 
-    // var meterGeom = new THREE.CylinderGeometry(0.8, 0.8, 0.4, 32);
-    // meterTop = new THREE.Mesh(meterGeom, new THREE.MeshBasicMaterial({ color: "gray" }));
-    // meterTop.position.y += 0.5;
-    // meterTop.position.z += 5;
-    // meterTop.position.x += 0.8;
-    // meterTop.rotation.x += Math.PI / 2;
-    // var edges = new THREE.EdgesGeometry(meterGeom);
-    // var line = new THREE.LineSegments(edges, new THREE.LineBasicMaterial({ color: 0x000 }));
-
-    // meterTop.add(line);
-
     // var geometry = new THREE.CircleGeometry(0.75, 32);
     // var material = new THREE.MeshBasicMaterial({ color: 0xffffff });
     // var circle = new THREE.Mesh(geometry, material);
@@ -2543,6 +2534,12 @@ function loadExperimentElements() {
     PIEaddInputCheckbox("Button Magnet",false,chooseButtonMagnet);
     PIEaddInputCheckbox("Ring Magnet",false,chooseRingMagnet);
     PIEaddInputCheckbox("Horse Shoe Magnet",false,chooseHsMagnet);
+
+    PIEaddInputCommand("Change Poles",changePoles);
+
+    //==================to start the experiment with bar magnet======================================//
+
+    chooseBarMagnet();
     // This function adds a command element to the Display panel
 
     // The label is the id(label) appearing on the command button.
@@ -2566,6 +2563,103 @@ function loadExperimentElements() {
     //   document.addEventListener('mousedown', onDocumentMouseDown, false );
 }
 
+var originalPolesBar=true;
+var originalPolesRing=true;
+var originalPolesHs=true;
+var originalPolesButton=true;
+
+
+function changePoles(){
+
+    // console.log("hi");
+    PIEstopAnimation();
+    if(hasChosen){
+        if(choice=="barmagnet"){
+            if(originalPolesBar){
+                originalPolesBar=false;
+                bar.position.set(.3, 0, 0);
+                bar.rotation.y = Math.PI / 6 + Math.PI;
+                PIErender();
+            }
+            else{
+                originalPolesBar=true;
+                bar.position.set(.3, 0, 0);
+                bar.rotation.y = Math.PI / 6;
+                PIErender();
+            }
+           
+        }
+        else if(choice=="ringmagnet"){
+            if (originalPolesRing) {
+                originalPolesRing=false;
+                ringMagnet.position.set(.2, .5, 2);
+                ringMagnet.rotation.x=-Math.PI/2-Math.PI/6;
+                ringMagnet.rotation.z = -Math.PI / 6 ;
+                PIErender();
+            }
+            else {
+                originalPolesRing=true;
+                ringMagnet.position.set(.2, .5, 2);
+                ringMagnet.rotation.x=-Math.PI/2-Math.PI/6;
+                ringMagnet.rotation.z=-Math.PI/6+Math.PI;
+                PIErender();
+            }
+            
+        }
+        else if(choice=="buttonmagnet"){
+            if (originalPolesButton) {
+                originalPolesButton=false;
+                buttonMagnet.position.set(.2, .5, 2);
+                buttonMagnet.rotation.x=-Math.PI/2-Math.PI/6;
+                buttonMagnet.rotation.z = -Math.PI / 6;
+                PIErender();
+            }
+            else {
+                originalPolesButton=true;
+                buttonMagnet.position.set(.2, .5, 2);
+                buttonMagnet.rotation.x=-Math.PI/2-Math.PI/6;
+                buttonMagnet.rotation.z=-Math.PI/6+Math.PI;
+                PIErender();
+            }
+
+        }
+        else if(choice=="horseshoemagnet"){
+            if (originalPolesHs) {
+                originalPolesHs = false;
+                
+                horseShoeMagnet.position.set(-.6,-1.8,2);
+                horseShoeMagnet.rotation.x=-Math.PI/6;
+                horseShoeMagnet.rotation.y=Math.PI/6+Math.PI;
+                PIErender();
+            }
+            else {
+                originalPolesHs = true;
+                 
+                horseShoeMagnet.position.set(-.6,-1.8,2);
+                horseShoeMagnet.rotation.x=-Math.PI/6;
+                horseShoeMagnet.rotation.y=Math.PI/6;
+                PIErender();
+            }
+
+        }
+
+    }
+}
+        // bar.position.set(.3, 0, 0);
+        // bar.rotation.y=Math.PI/6;
+
+        
+        // horseShoeMagnet.position.set(-.6,-1.8,2);
+        // horseShoeMagnet.rotation.x=-Math.PI/6;
+        // horseShoeMagnet.rotation.y=Math.PI/6;
+
+        // ringMagnet.position.set(.2, .5, 2);
+        // ringMagnet.rotation.x=-Math.PI/2-Math.PI/6;
+        // ringMagnet.rotation.z=-Math.PI/6+Math.PI;
+
+        // buttonMagnet.position.set(.2, .5, 2);
+        // buttonMagnet.rotation.x=-Math.PI/2-Math.PI/6;
+        // buttonMagnet.rotation.z=-Math.PI/6+Math.PI;
 var flag1=1;
 var flag2=1;
 var flag3=1;
@@ -2573,11 +2667,13 @@ var flag4=1;
 
 function chooseBarMagnet(){
     if(flag1==1){
+    // alert("hi");
+    stopAnimation();
+    PIEstopAnimation();
     flag1=0;
     flag2=1;
     flag3=1;
     flag4=1;
-   stopAnimation();
     removePrevMagnets();
     PIEchangeInputCheckbox("Bar Magnet",true);
     PIEchangeInputCheckbox("Button Magnet",false);
@@ -2586,6 +2682,7 @@ function chooseBarMagnet(){
    choice="barmagnet";
    hasChosen=1;
    showBarMagnet();
+   PIErender();
 }
 
 
@@ -2598,6 +2695,7 @@ function chooseHsMagnet(){
     flag3=1;
     flag4=1;
    stopAnimation();
+   PIEstopAnimation();
    removePrevMagnets();
     PIEchangeInputCheckbox("Bar Magnet",false);
     PIEchangeInputCheckbox("Button Magnet",false);
@@ -2606,6 +2704,7 @@ function chooseHsMagnet(){
    choice="horseshoemagnet";
    hasChosen=1;
    showHorseShoeMagnet();
+   PIErender();
 }
 
 }
@@ -2617,6 +2716,7 @@ function chooseButtonMagnet(){
     flag3=0;
     flag4=1;
    stopAnimation();
+   PIEstopAnimation();
    removePrevMagnets();
     PIEchangeInputCheckbox("Bar Magnet",false);
     PIEchangeInputCheckbox("Button Magnet",true);
@@ -2625,6 +2725,7 @@ function chooseButtonMagnet(){
    choice="buttonmagnet";
    hasChosen=1;
    showButtonMagnet();
+   PIErender();
 
 }
 }
@@ -2636,6 +2737,7 @@ function chooseRingMagnet(){
     flag3=1;
     flag4=0;
    stopAnimation();
+   PIEstopAnimation();
    removePrevMagnets();
     PIEchangeInputCheckbox("Bar Magnet",false);
     PIEchangeInputCheckbox("Button Magnet",false);
@@ -2644,6 +2746,7 @@ function chooseRingMagnet(){
    choice="ringmagnet";
    hasChosen=1;
    showRingMagnet();
+   PIErender();
 }
 
 
