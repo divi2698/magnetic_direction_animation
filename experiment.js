@@ -59,6 +59,127 @@ function initialiseHelp() {
     PIEupdateHelp(helpContent);
 }
 
+var conceptContent;
+
+var PIEconceptModal;
+var PIEconceptContent;
+var PIEconceptSpan;
+function learnMore() {
+    conceptContent = "";
+    conceptContent = conceptContent + "<h2>About Magnetic Direction</h2>";
+    conceptContent = conceptContent + "<h3>A magnetic compass points to the earth's magnetic poles, which are not the same as earth's geographic poles.</h3>";
+    conceptContent = conceptContent + "<h3>Furthermore, the magnetic pole near earth's geographic north pole is actually the south magnetic pole.</p>";
+    conceptContent = conceptContent + "<h3>When it comes to magnets, opposites attract. This fact means that the north end of a magnet in a compass is attracted to the south magnetic pole, which lies close to the geographic north pole. </h3>";
+    conceptContent = conceptContent + "<h3>Magnetic field lines outside of a permanent magnet always run from the north magnetic pole to the south magnetic pole.</p>";
+    conceptContent = conceptContent + "<h3>Therefore, the magnetic field lines of the earth run from the southern geographic hemisphere towards the northern geographic hemisphere.</p>";
+    conceptContent = conceptContent + "<center><img src='./poles.png' width='300px' height='183px'></center>";
+    PIEupdateConcept(conceptContent);
+}
+
+function PIEaddModalWindows() {
+    var a;
+    var b;
+    a = "display: none; position: fixed; z-index: 1; padding-top: 100px; left: 0; top: 0; width: 100%; height: 100%; overflow: auto; background-color: rgb(0,0,0); background-color: rgba(0,0,0,0.4); color:#000;";
+    ImodalContentStyle = "background-color:rgb(236,236,236); background-color:rgba(236,236,236,0.95); margin: auto auto 200px; padding: 20px; border: 10px solid #008000; width: 80%;";
+    HmodalContentStyle = "background-color:rgb(236,236,236); background-color:rgba(236,236,236,0.95); margin: auto auto 200px; padding: 20px; border: 10px solid #F0F000; width: 80%;";
+    PIEhelpModal = document.createElement("div");
+    PIEhelpModal.style = a;
+    PIEhelpModal.onclick = function () {
+        PIEhelpModal.style.display = "none"
+    };
+    PIEhelpContent = document.createElement("div");
+    PIEhelpContent.style = HmodalContentStyle;
+    PIEhelpSpan = document.createElement("span");
+    PIEhelpSpan.className = "close";
+    PIEhelpSpan.style = "color: #000000; float: right; font-size: 28px; font-weight: bold;";
+    PIEhelpSpan.innerHTML = "&times;";
+    PIEhelpSpan.onclick = function () {
+        PIEhelpModal.style.display = "none"
+    };
+    PIEhelpSpan.onmouseover = function () {
+        PIEhelpSpan.style = "color: #000; text-decoration: none; cursor: pointer;"
+    };
+    PIEhelpSpan.onmouseout = function () {
+        PIEhelpSpan.style = "color: #000000; cursor: auto;"
+    };
+    PIEhelpContent.appendChild(PIEhelpSpan);
+    PIEhelpModal.appendChild(PIEhelpContent);
+    PIEscreenElem.appendChild(PIEhelpModal);
+
+
+    PIEinfoModal = document.createElement("div");
+    PIEinfoModal.style = a;
+    PIEinfoModal.onclick = function () {
+        PIEinfoModal.style.display = "none"
+    };
+    PIEinfoContent = document.createElement("div");
+    PIEinfoContent.style = ImodalContentStyle;
+    PIEinfoSpan = document.createElement("span");
+    PIEinfoSpan.className = "close";
+    PIEinfoSpan.style = "color: #008000; float: right; font-size: 28px; font-weight: bold;";
+    PIEinfoSpan.innerHTML = "&times;";
+    PIEinfoSpan.onclick = function () {
+        PIEinfoModal.style.display = "none"
+    };
+    PIEinfoSpan.onmouseover = function () {
+        PIEinfoSpan.style = "color: #000; text-decoration: none; cursor: pointer;"
+    };
+    PIEinfoSpan.onmouseout = function () {
+        PIEinfoSpan.style = "color: #008000; cursor: auto;"
+    };
+    PIEinfoContent.appendChild(PIEinfoSpan);
+    PIEinfoModal.appendChild(PIEinfoContent);
+    PIEscreenElem.appendChild(PIEinfoModal);
+
+
+//==concept=================//
+    PIEconceptModal = document.createElement("div");
+    PIEconceptModal.style = a;
+    PIEconceptModal.onclick = function () {
+        PIEconceptModal.style.display = "none"
+    };
+    PIEconceptContent = document.createElement("div");
+    PIEconceptContent.style = ImodalContentStyle;
+    PIEconceptSpan = document.createElement("span");
+    PIEconceptSpan.className = "close";
+    PIEconceptSpan.style = "color: #008000; float: right; font-size: 28px; font-weight: bold;";
+    PIEconceptSpan.innerHTML = "&times;";
+    PIEconceptSpan.onclick = function () {
+        PIEconceptModal.style.display = "none"
+    };
+    PIEconceptSpan.onmouseover = function () {
+        PIEconceptSpan.style = "color: #000; text-decoration: none; cursor: pointer;"
+    };
+    PIEconceptSpan.onmouseout = function () {
+        PIEconceptSpan.style = "color: #008000; cursor: auto;"
+    };
+    PIEconceptContent.appendChild(PIEconceptSpan);
+    PIEconceptModal.appendChild(PIEconceptContent);
+    PIEscreenElem.appendChild(PIEconceptModal);
+
+
+}
+
+
+function PIEupdateConcept(a) {
+    var b;
+    PIEconceptContent.innerHTML = "";
+    PIEconceptContent.appendChild(PIEinfoSpan);
+    b = PIEconceptContent.innerHTML;
+    PIEconceptContent.innerHTML = b + a
+}
+
+function PIEappendConcept(a) {
+    var b;
+    b = PIEconceptContent.innerHTML;
+    PIEconceptContent.innerHTML = b + a
+}
+
+function PIEshowConcept() {
+    PIEconceptModal.style.display = "block"
+}
+
+
 var infoContent;
 function initialiseInfo() {
     infoContent = "";
@@ -121,7 +242,7 @@ function initialiseScene() {
 
     //PIEadjustDisplayScene();
     PIErenderer.shadowMapEnabled = false;
-    PIErenderer.shadowMap.type = THREE.PCFSoftShadowMap
+    PIErenderer.shadowMap.type = THREE.PCFSoftShadowMap;
         // PIEcamera.position.set(0,0,50);
         // PIEcamera.up = new THREE.Vector3(,25,70);; 
 
@@ -141,500 +262,6 @@ function startOrbitalControls() {
     controls.enabled = false;
 }
 
-// var lampBulb, lampBulbGeom;
-// function addBulb() {
-//     var lampBottomGeom = new THREE.CylinderGeometry(.4, .4, 0.7, 12);//bottom of bulb
-//     var lampBottom = new THREE.Mesh(lampBottomGeom, new THREE.MeshPhongMaterial({ color: "gray", shininess: 0 }));
-//     lampBottom.position.set(-3, 0.8, -3);
-//     // PIEaddElement(lampBottom);
-
-//     lampBulbGeom = new THREE.SphereGeometry(1.1, 32, 24);
-//     lampBulbGeom.translate(0, 1.3, 0);
-//     lampBulb = new THREE.Mesh(lampBulbGeom, new THREE.MeshPhongMaterial({ color: 0xffffff, transparent: true, opacity: 0.8 }));
-//     // lampBottom.add(lampBulb);
-
-//     var baseGeom = new THREE.BoxGeometry(3, 1.3, 1.3);
-//     baseGeom.translate(0, -0.6, 0);
-//     var base = new THREE.Mesh(baseGeom, new THREE.MeshBasicMaterial({/*color: 0xd3d3d3*/color: "gray" }));
-
-//     var edges = new THREE.EdgesGeometry(baseGeom);
-//     var line = new THREE.LineSegments(edges, new THREE.LineBasicMaterial({ color: 0x000 }));
-
-//     cylgeom = new THREE.CylinderGeometry(0.1, 0.1, 0.5, 32);
-//     cylgeom.translate(1.2, 0, 0);
-//     var cylinder1 = new THREE.Mesh(cylgeom, new THREE.MeshBasicMaterial({ color: 0xff0000 }));
-
-//     cylgeom2 = new THREE.CylinderGeometry(0.1, 0.1, 0.5, 32);
-//     cylgeom2.translate(-1.2, 0, 0);
-//     var cylinder2 = new THREE.Mesh(cylgeom2, new THREE.MeshBasicMaterial({ color: 0x000000 }));
-
-//     base.add(cylinder1);
-//     base.add(cylinder2);
-//     // lampBottom.add(line); //;lamp box or base
-//     // lampBottom.add(base);
-// }
-
-// var prism1, prism2, fakeSwitch;
-// function addSwitchPrism(x, y, z, ang, color) {
-//     PrismGeometry = function (vertices, height) {
-//         var Shape = new THREE.Shape();
-
-//         (function f(ctx) {
-
-//             ctx.moveTo(vertices[0].x, vertices[0].y);
-//             for (var i = 1; i < vertices.length; i++) {
-//                 ctx.lineTo(vertices[i].x, vertices[i].y);
-//             }
-
-//             ctx.lineTo(vertices[0].x, vertices[0].y);
-
-//         })(Shape);
-
-//         var settings = {};
-//         settings.amount = height;
-//         settings.bevelEnabled = false;
-//         THREE.ExtrudeGeometry.call(this, Shape, settings);
-
-//     };
-//     //for the switch buttons
-
-//     //Object of Prism Class
-//     PrismGeometry.prototype = Object.create(THREE.ExtrudeGeometry.prototype);
-
-
-//     /*-----------------First Prism starts----------*/
-
-//     //Coordinates of first prism            
-//     var A = new THREE.Vector2(0, 0);
-//     var B = new THREE.Vector2(0.7, 0);
-//     var C = new THREE.Vector2(0, 0.3);
-
-//     //height of first prism 
-//     var height1 = 0.5;
-
-//     //geometry for prism prism        
-//     var geometry1 = new PrismGeometry([A, B, C], height1);
-
-//     var geometry2 = new PrismGeometry([A, B, C], height1);
-
-//     var material1 = new THREE.MeshPhongMaterial({ color: color });
-
-//     var material2 = new THREE.MeshPhongMaterial({ color: 0x000 });
-
-//     prism1 = new THREE.Mesh(geometry1, material1);
-//     prism1.position.y += x;
-//     prism1.position.x += y;
-//     prism1.position.z += z;
-//     prism1.rotation.y += ang;
-
-//     // base.add(prism1);
-
-//     prism2 = new THREE.Mesh(geometry2, material2);
-//     prism2.position.y += x - 0.25;
-//     prism2.position.x += y + 1.3;
-//     prism2.position.z += z + 0.5;
-//     prism2.rotation.y += Math.PI;
-//     prism2.rotation.z += Math.PI / 8;
-
-
-
-
-//     // base.add(prism2); //switch prisms
-// }
-///////////////////////////////////////////////////////////
-
-// var base;
-// function addSwitch() {
-//     var baseGeom = new THREE.BoxGeometry(3, 1, 2);
-//     base = new THREE.Mesh(baseGeom, new THREE.MeshBasicMaterial({/*color: 0xd3d3d3*/color: "gray" }));
-
-//     var edges = new THREE.EdgesGeometry(baseGeom);
-//     var line = new THREE.LineSegments(edges, new THREE.LineBasicMaterial({ color: 0x000 }));
-
-//     // base.add(line);
-
-//     base.rotation.y += Math.PI / 6;
-//     base.position.x += 6;
-//     // PIEaddElement(base); //base of switch
-//     // addSwitchPrism(0.5, -0.8, -0.3, 0, 0xff0000);
-
-//     cylgeom = new THREE.CylinderGeometry(0.1, 0.1, 0.5, 32);
-//     cylgeom.translate(1.2, 0.5, 0);
-//     var cylinder1 = new THREE.Mesh(cylgeom, new THREE.MeshBasicMaterial({ color: 0xff0000 }));
-
-//     cylgeom2 = new THREE.CylinderGeometry(0.1, 0.1, 0.5, 32);
-//     cylgeom2.translate(-1.2, 0.5, 0);
-//     var cylinder2 = new THREE.Mesh(cylgeom2, new THREE.MeshBasicMaterial({ color: 0x000000 }));
-
-//     // base.add(cylinder1);
-//     // base.add(cylinder2);   //cylinders on the switch
-// }
-////////////////////////////////////////////////////////////
-
-var plus2, cuboidOrange;
-
-function mybattery(x, y, z) {
-    // var a = 3;
-    // cuboidOrange = new THREE.Mesh(new THREE.CubeGeometry(4 / a, 5 / a, 2 / a, 4, 4, 1), new THREE.MeshBasicMaterial({ color: "white" }));
-    // cuboidOrange.position.set(7, 0, 5.8);
-    // PIEaddElement(cuboidOrange);//battery
-    // //battery top portion 
-    // var curve1O = new THREE.Mesh(new THREE.CylinderGeometry(1 / a, 1 / a, 4 / a, 32), new THREE.MeshBasicMaterial({ color: "white" }));
-    // curve1O.position.set(x, y + 2.5 / a, z);
-    // cuboidOrange.add(curve1O);
-    // curve1O.rotation.z = Math.PI / 2;
-
-    // // battery top portion
-    // var curve2O = new THREE.Mesh(new THREE.CylinderGeometry(1 / a, 1 / a, 4 / a, 32), new THREE.MeshBasicMaterial({ color: "white" }));
-    // curve2O.position.set(x, y - 2.5 / a, z);
-    // cuboidOrange.add(curve2O);
-    // curve2O.rotation.z = Math.PI / 2;
-
-    // // battey bottom portion
-    // var cuboidBlack = new THREE.Mesh(new THREE.CubeGeometry(6 / a, 5 / a, 2 / a, 4, 4, 1), new THREE.MeshBasicMaterial({ color: "#0d84e5" }));
-    // cuboidBlack.position.set(x + 5 / a, y, z);
-    // cuboidOrange.add(cuboidBlack);
-
-    // var curve1B = new THREE.Mesh(new THREE.CylinderGeometry(1 / a, 1 / a, 6 / a, 32), new THREE.MeshBasicMaterial({ color: "#0d84e5" }));
-    // curve1B.position.set(x + 5 / a, y + 2.5 / a, z);
-    // cuboidOrange.add(curve1B);
-    // curve1B.rotation.z = Math.PI / 2;
-
-    // var curve2B = new THREE.Mesh(new THREE.CylinderGeometry(1 / a, 1 / a, 6 / a, 32), new THREE.MeshBasicMaterial({ color: "#0d84e5" }));
-    // curve2B.position.set(x + 5 / a, y - 2.5 / a, z);
-    // cuboidOrange.add(curve2B);
-    // curve2B.rotation.z = Math.PI / 2;
-
-    // var minus = new THREE.Mesh(new THREE.CubeGeometry(2 / a, 0.3 / a, 0.1 / a, 4, 4, 1), new THREE.MeshBasicMaterial({ color: "red" }));
-    // minus.position.set(x, y + 2.5 / a, z + 1.1 / a);
-    // cuboidOrange.add(minus);
-
-    // var plus1 = new THREE.Mesh(new THREE.CubeGeometry(2 / a, 0.3 / a, 0.1 / a, 4, 4, 1), new THREE.MeshBasicMaterial({ color: "red" }));
-    // plus1.position.set(x, y - 1.5 / a, z + 1.1 / a);
-    // cuboidOrange.add(plus1);
-
-    // plus2 = new THREE.Mesh(new THREE.CubeGeometry(2 / a, 0.3 / a, 0.1 / a, 4, 4, 1), new THREE.MeshBasicMaterial({ color: "red" }));
-    // plus2.position.set(x, y - 1.5 / a, z + 1.1 / a);
-    // cuboidOrange.add(plus2);
-    // plus2.rotation.z = Math.PI / 2;
-
-    // var terminal1 = new THREE.Mesh(new THREE.CylinderGeometry(0.5 / a, 0.5 / a, 0.5 / a, 32), new THREE.MeshBasicMaterial({ color: "gray" }));
-    // terminal1.position.set(x - 2.2/ a, y + 2.2 / a, z);
-    // cuboidOrange.add(terminal1);
-    // terminal1.rotation.z = Math.PI / 2;
-
-    // var terminal2 = new THREE.Mesh(new THREE.CylinderGeometry(0.5 / a, 0.5 / a, 0.5 / a, 32), new THREE.MeshBasicMaterial({ color: "gray" }));
-    // terminal2.position.set(x - 2.2 / a, y - 2.2 / a, z);
-    // cuboidOrange.add(terminal2);
-    // terminal2.rotation.z = Math.PI / 2;
-
-    // cuboidOrange.position.x += -7;
-    // cuboidOrange.position.y += -0.2;
-    // cuboidOrange.position.z += 3;
-    // cuboidOrange.rotation.z = Math.PI;
-    // cuboidOrange.rotation.x = -Math.PI / 2;
-}
-////////////////////////////////////////////////////////////////////////////
-
-// function addArrows() {
-//     arrow1 = new THREE.Mesh(new THREE.CylinderGeometry(0.035, 0.035, 0.45, 32), new THREE.MeshBasicMaterial({ color: "red" }));
-//     // PIEaddElement(arrow1);
-//     arrow1.position.set(3.6, 2.5, -1.6);
-//     arrow1.rotation.y -= 0.3;
-//     arrow1.rotation.z += 1.2;
-
-//     arrow1A = new THREE.Mesh(new THREE.CylinderGeometry(0.035, 0.035, 0.45, 32), new THREE.MeshBasicMaterial({ color: "red" }));
-//     // PIEaddElement(arrow1A);
-//     arrow1A.position.set(3.6, 2.5, -1.6);
-//     arrow1A.rotation.y += 0.3;
-//     arrow1A.rotation.z -= 1.2;
-
-
-//     arrow2 = new THREE.Mesh(new THREE.CylinderGeometry(0.035, 0.035, 0.45, 32), new THREE.MeshBasicMaterial({ color: "red" }));
-//     // PIEaddElement(arrow2);
-//     arrow2.position.set(3.6, 2.3, -1.6);
-//     arrow2.rotation.y -= 0.3;
-//     arrow2.rotation.z -= 1.2;
-
-
-//     arrow2A = new THREE.Mesh(new THREE.CylinderGeometry(0.035, 0.035, 0.45, 32), new THREE.MeshBasicMaterial({ color: "red" }));
-//     // PIEaddElement(arrow2A);
-//     arrow2A.position.set(3.6, 2.3, -1.6);
-//     arrow2A.rotation.y += 0.3;
-//     arrow2A.rotation.z += 1.2;
-
-
-//     arrow3 = new THREE.Mesh(new THREE.CylinderGeometry(0.035, 0.035, 0.45, 32), new THREE.MeshBasicMaterial({ color: "red" }));
-//     // PIEaddElement(arrow3);
-//     arrow3.position.set(-4, -0.45, 4.3);
-//     arrow3.rotation.z -= Math.PI / 3;
-//     //arrow3.rotation.z += 1.8;
-
-//     arrow4 = new THREE.Mesh(new THREE.CylinderGeometry(0.035, 0.035, 0.45, 32), new THREE.MeshBasicMaterial({ color: "red" }));
-//     // PIEaddElement(arrow4);
-//     arrow4.position.set(-4, -0.2, 4.3);
-//     arrow4.rotation.z += Math.PI / 3;
-
-
-//     arrow3A = new THREE.Mesh(new THREE.CylinderGeometry(0.035, 0.035, 0.45, 32), new THREE.MeshBasicMaterial({ color: "red" }));
-//     // PIEaddElement(arrow3A);
-//     arrow3A.position.set(-4, -0.45, 4.2);
-//     arrow3A.rotation.z += Math.PI / 3;
-//     //arrow3A.rotation.x += Math.PI/4;
-//     //arrow3A.rotation.z -= 1.2;
-
-//     arrow4A = new THREE.Mesh(new THREE.CylinderGeometry(0.035, 0.035, 0.45, 32), new THREE.MeshBasicMaterial({ color: "red" }));
-//     // PIEaddElement(arrow4A);
-//     arrow4A.position.set(-4, -0.2, 4.2);
-//     arrow4A.rotation.z -= Math.PI / 3;
-//     //arrow4A.rotation.x += Math.PI/4;
-//     //arrow4A.rotation.z += 1.8;
-
-//     arrow5 = new THREE.Mesh(new THREE.CylinderGeometry(0.035, 0.035, 0.45, 32), new THREE.MeshBasicMaterial({ color: "red" }));
-//     // PIEaddElement(arrow5);
-//     arrow5.position.set(-5.05, 0.3, -1.4);
-//     arrow5.rotation.x -= 0.8;
-//     arrow5.rotation.y -= 0.3;
-//     arrow5.rotation.z += 2.6;
-
-//     arrow6 = new THREE.Mesh(new THREE.CylinderGeometry(0.035, 0.035, 0.45, 32), new THREE.MeshBasicMaterial({ color: "red" }));
-//     // PIEaddElement(arrow6);
-//     arrow6.position.set(-4.85, 0.28, -1.38);
-//     arrow6.rotation.x -= 0.4;
-//     arrow6.rotation.y -= 0.3;
-//     arrow6.rotation.z += 0.3;
-
-
-//     arrow5A = new THREE.Mesh(new THREE.CylinderGeometry(0.035, 0.035, 0.45, 32), new THREE.MeshBasicMaterial({ color: "red" }));
-//     // PIEaddElement(arrow5A);
-//     arrow5A.position.set(-5.05, 0.3, -1.4);
-//     arrow5A.rotation.x -= 0.8;
-//     arrow5A.rotation.y -= 0.3;
-//     arrow5A.rotation.z += 0.4;
-
-//     arrow6A = new THREE.Mesh(new THREE.CylinderGeometry(0.035, 0.035, 0.45, 32), new THREE.MeshBasicMaterial({ color: "red" }));
-//     // PIEaddElement(arrow6A);
-//     arrow6A.position.set(-4.85, 0.28, -1.38);
-//     arrow6A.rotation.x -= 0.4;
-//     arrow6A.rotation.y += 0.3;
-//     arrow6A.rotation.z += 2.3;
-// }
-////////////////////////////////////////////////
-
-// function addCurvedWire() {
-  
-
-    
-//     var curve = new THREE.CubicBezierCurve3(
-//         new THREE.Vector3(3.7, 0, 2.8),
-//         new THREE.Vector3(3.9, 0, 2.2),
-//         new THREE.Vector3(4.1, -0.4, 1.8),
-//         new THREE.Vector3(4.41, 0.81, 1.5)
-
-
-
-//     );
-
-//     var tube = new THREE.TubeGeometry(curve, 40, 0.05, 20, false);
-//     var mesh = new THREE.Mesh(tube, new THREE.MeshBasicMaterial({ color: "black" }));
-
-//     // PIEaddElement(mesh);//connecting to blsck of switch
-
-//     var curve2 = new THREE.CubicBezierCurve3(
-//         new THREE.Vector3(4.4, 0.8, 1.5),
-//         new THREE.Vector3(4.6, 1.6, 1),
-//         new THREE.Vector3(4.9, 1.3, 0.6),
-//         new THREE.Vector3(5, 0.5, 0.6)
-//     );
-
-//     var tube2 = new THREE.TubeGeometry(curve2, 40, 0.05, 20, false);
-//     var mesh2 = new THREE.Mesh(tube2, new THREE.MeshBasicMaterial({ color: "black" }));
-
-//     // PIEaddElement(mesh2); //curved wire connecting to black switch part
-
-
-//     var curve3 = new THREE.CubicBezierCurve3(
-//         new THREE.Vector3(-6.2, -0.2, 3.8),di
-//         new THREE.Vector3(-4.5, -0.4, 4),
-//         new THREE.Vector3(-2.2, -0.4, 4.5),
-//         new THREE.Vector3(-0.7, -0.3, 5.83)
-//     );
-
-//     var tube3 = new THREE.TubeGeometry(curve3, 40, 0.05, 20, false);
-//     var mesh3 = new THREE.Mesh(tube3, new THREE.MeshBasicMaterial({ color: "black" }));
-
-//     PIEaddElement(mesh3); //cinnecting to -  terminal of battery
-
-
-//     // var curve31 = new THREE.CubicBezierCurve3(
-//     // new THREE.Vector3( -0.7, -0.3, 5.83 ),
-//     // new THREE.Vector3( 0, -0.3, 6.5 ),
-//     // new THREE.Vector3( 0.3, -0.3, 7.5 ),
-//     // new THREE.Vector3( 0.52, -0.3, 6.53 )
-//     // );
-
-//     // var tube31 = new THREE.TubeGeometry(curve31, 40, 0.05, 20, false);
-//     // var mesh31 = new THREE.Mesh(tube31, new THREE.MeshBasicMaterial({color: "black"}));
-
-//     // PIEaddElement(mesh31); //wire under the pink cardboard
-
-//     var curve4 = new THREE.CubicBezierCurve3(
-//         new THREE.Vector3(-6.2, -0.2, 2.3),
-//         new THREE.Vector3(-5.6, -0.4, 1),
-//         new THREE.Vector3(-5.2, -0.8, -0.5),
-//         new THREE.Vector3(-5, 0, -1.2)
-//     );
-
-//     var tube4 = new THREE.TubeGeometry(curve4, 40, 0.05, 20, false);
-//     var mesh4 = new THREE.Mesh(tube4, new THREE.MeshBasicMaterial({ color: "black" }));
-
-//     PIEaddElement(mesh4);//mesh here are the wires wire conecting the + to bulb
-
-//     var curve5 = new THREE.CubicBezierCurve3(
-//         new THREE.Vector3(7.05, 0.7, -0.58),
-//         new THREE.Vector3(6, 2.3, -1),
-//         new THREE.Vector3(2, 3.4, -2),
-//         new THREE.Vector3(0.9, 1, -2.5)
-//     );
-
-//     var tube5 = new THREE.TubeGeometry(curve5, 40, 0.05, 20, false);
-//     var mesh5 = new THREE.Mesh(tube5, new THREE.MeshBasicMaterial({ color: "black" }));
-
-//     // PIEaddElement(mesh5); //from the red switch port ot he bulb
-
-
-//     var curve51 = new THREE.CubicBezierCurve3(
-//         new THREE.Vector3(-1.85, 0.92, -3),
-//         new THREE.Vector3(-0.4, 2, 2.1),
-//         new THREE.Vector3(-0.4, -2, -2.7),
-//         new THREE.Vector3(0.91, 1.01, -2.5)
-//     );
-
-//     var tube51 = new THREE.TubeGeometry(curve51, 40, 0.05, 20, false);
-//     var mesh51 = new THREE.Mesh(tube51, new THREE.MeshBasicMaterial({ color: "black" }));
-
-//     // PIEaddElement(mesh51); //from bulb to red switch port
-
-//     var curve6 = new THREE.CubicBezierCurve3(
-//         new THREE.Vector3(-4.2, 1, -3),
-//         new THREE.Vector3(-4.4, 2.4, -2.7),
-//         new THREE.Vector3(-4.8, 1, -2),
-//         new THREE.Vector3(-5, 0, -1.2)
-//     );
-
-//     var tube6 = new THREE.TubeGeometry(curve6, 40, 0.05, 20, false);
-//     //  TubeGeometry(path, tubularSegments, radius, radialSegments, closed)
-//     // path — Curve - A path that inherits from the Curve base class
-//     //     tubularSegments — Integer - The number of segments that make up the tube, default is 64
-//     // radius — Float - The radius of the tube, default is 1
-//     // radialSegments — Integer - The number of segments that make up the cross - section, default is 8
-//     // closed — Boolean Is the tube open or closed, default is false 
-//     var mesh6 = new THREE.Mesh(tube6, new THREE.MeshBasicMaterial({ color: "black" }));
-
-//     // PIEaddElement(mesh6); //bulb to  the + terminal of battery
-   
-
-//     // var points = curve.getSpacedPoints(20);
-
-//     // var path = new THREE.Path();
-//     // var geometry = path.createGeometry(points);
-
-//     // var material = new THREE.LineBasicMaterial({ color: 0xff0000 });
-
-//     // var line = new THREE.Line(geometry, material);
-
-//     // PIEaddElement(line);
-
-
-
-//     // var curve7 = new THREE.CubicBezierCurve3(
-//     //     new THREE.Vector3( -4.2, 1, -3 ),
-//     //     new THREE.Vector3( -4.4, 2.4, -2.7 ),
-//     //     new THREE.Vector3( -4.8, 1, -2 ),
-//     //     new THREE.Vector3( -5, 0, -1.2 )
-//     //     );
-
-//     //     var tube7 = new THREE.TubeGeometry(curve7, 40, 0.05, 20, false);
-//     //     var mesh7 = new THREE.Mesh(tube7, new THREE.MeshBasicMaterial({color: "black"}));
-
-//     //     PIEaddElement(mesh7);
-// }
-
-
-function addCurvedWire(){
-    // var curve = new THREE.CubicBezierCurve3(
-    //     new THREE.Vector3(0.8, 0.730, 10.4),
-    //     new THREE.Vector3(8, 0.733, 10.4),
-    //     new THREE.Vector3(8.8, 0.733, 10.4),
-    //     new THREE.Vector3(8.8, 0.733, 10.4)
-    // );
-
-    // var tube = new THREE.TubeGeometry(curve, 1, 0.05, 20, false);
-    // var mesh = new THREE.Mesh(tube, new THREE.MeshBasicMaterial({ color: "black" }));
-
-    // PIEaddElement(mesh);//connecting to -ve of battery
-
-    // var curve = new THREE.CubicBezierCurve3(
-    //     new THREE.Vector3(0.8, 0.730, 10.4),
-    //     new THREE.Vector3(8.8, 0.733, 10),
-    //     new THREE.Vector3(8.8, 0.733, 9.5),
-    //     new THREE.Vector3(8.8, 0, 0.4)
-    // );
-
-    // var tube = new THREE.TubeGeometry(curve, 100, 0.05, 20, false);
-    // var mesh = new THREE.Mesh(tube, new THREE.MeshBasicMaterial({ color: "black" }));
-
-    // PIEaddElement(mesh);//connecting to -ve of battery
-
-
-    // var curve1 = new THREE.CubicBezierCurve3(
-    //     new THREE.Vector3(8.8, 0.730, 10.4),
-    //     new THREE.Vector3(8.8, 0.733, 8),
-    //     new THREE.Vector3(8.8, 0.733, 7),
-    //     new THREE.Vector3(8.8, 0.733, 0.4)
-    // );
-
-    // var tube1 = new THREE.TubeGeometry(curve1, 1, 0.05, 20, false);
-    // var mesh1 = new THREE.Mesh(tube1, new THREE.MeshBasicMaterial({ color: "black" }));
-
-    // PIEaddElement(mesh1);//right side 
-
-    // var curve2 = new THREE.CubicBezierCurve3(
-    //     new THREE.Vector3(0.8, 0.733, 9),
-    //     new THREE.Vector3(5.5, 3.933, 12),
-    //     new THREE.Vector3(-5.5, 0, 10.2),
-    //     new THREE.Vector3(-6.5,.9,10.2)
-    // );
-
-    // var tube2 = new THREE.TubeGeometry(curve2, 100, 0.05, 40, false);
-    // var mesh2 = new THREE.Mesh(tube2, new THREE.MeshBasicMaterial({ color: "black" }));
-
-    // PIEaddElement(mesh2);//+ve terminal to battery 
-
-    // var curve3 = new THREE.CubicBezierCurve3(
-    //     new THREE.Vector3(-6.45, .9, 10.22),
-    //     new THREE.Vector3(-8.5,.733, 9),
-    //     new THREE.Vector3(-8.47, .733,6),
-    //     new THREE.Vector3(-8.8,0,.4)
-    // );
-
-    // var tube3 = new THREE.TubeGeometry(curve3, 100, 0.05, 100, false);
-    // var mesh3 = new THREE.Mesh(tube3, new THREE.MeshBasicMaterial({ color: "black" }));
-
-    // PIEaddElement(mesh3);//left side 
-
-    // var terminal3 = new THREE.Mesh(new THREE.CylinderGeometry(.166, .166, .8, 32), new THREE.MeshBasicMaterial({ color: "gray" }));
-    // terminal3.position.set(-8.8, 0, .4);
-
-    // PIEaddElement(terminal3);
-
-    // var terminal4 = new THREE.Mesh(new THREE.CylinderGeometry(.166, .166, .8, 32), new THREE.MeshBasicMaterial({ color: "gray" }));
-    // terminal4.position.set(8.8, 0, .4);
-
-    // PIEaddElement(terminal4);
-    
-    
-}
 
 //////////////////////////////////////////////////////////////////
 var tableTop;
@@ -700,160 +327,6 @@ function addTable() {
 var circle = new Array(50);
 var circle2 = new Array(50);
 var dirprism1, dirprism2, dirprism12, dirprism22;
-
-
-////////////////////////////////////////////////////
-// function addFieldLines() {
-//     for (var i = 0; i <= 4.001; i += 4 / (numberofturns + 4)) {
-//         var geometry4 = new THREE.RingGeometry((2 * i + 1) / (8 - currentVoltage + 1.6), (2 * i + 1) / (8 - currentVoltage + 1.6), 32);
-//         var material4 = new THREE.MeshBasicMaterial({ color: 0xffffff, side: THREE.DoubleSide });
-//         material4.wireframe = true;
-//         circle[i] = new THREE.Mesh(geometry4, material4);
-//         circle[i].position.set(centercoilx - 2, 1.61, centercoilz);
-//         circle[i].rotation.x += Math.PI / 2;
-//         // PIEaddElement(circle[i]); //looop for lefft circle
-//     }
-
-//     for (var i = 0; i <= 4.001; i += 4 / (numberofturns + 4)) {
-//         var geometry4 = new THREE.RingGeometry((2 * i + 1) / (8 - currentVoltage + 1.6), (2 * i + 1) / (8 - currentVoltage + 1.6), 32);
-//         var material4 = new THREE.MeshBasicMaterial({ color: 0xffffff, side: THREE.DoubleSide });
-//         material4.wireframe = true;
-//         circle2[i] = new THREE.Mesh(geometry4, material4);
-//         circle2[i].position.set(centercoilx + 2, 1.61, centercoilz);
-//         circle2[i].rotation.x += Math.PI / 2;
-//         // PIEaddElement(circle2[i]); //right field lines
-//     }
-
-//     PrismGeometry = function (vertices, height) {
-//         var Shape = new THREE.Shape();
-
-//         (function f(ctx) {
-
-//             ctx.moveTo(vertices[0].x, vertices[0].y);
-//             for (var i = 1; i < vertices.length; i++) {
-//                 ctx.lineTo(vertices[i].x, vertices[i].y);
-//             }
-
-//             ctx.lineTo(vertices[0].x, vertices[0].y);
-
-//         })(Shape);
-
-//         var settings = {};
-//         settings.amount = height;
-//         settings.bevelEnabled = false;
-//         THREE.ExtrudeGeometry.call(this, Shape, settings);
-
-//     };
-
-//     PrismGeometry.prototype = Object.create(THREE.ExtrudeGeometry.prototype);
-
-//     var A = new THREE.Vector2(-0.1, 0);
-//     var B = new THREE.Vector2(0.1, 0);
-//     var C = new THREE.Vector2(0, 0.5);
-
-//     var height1 = 0.01;
-
-//     var geometry1 = new PrismGeometry([A, B, C], height1);
-
-//     var material1 = new THREE.MeshBasicMaterial({ color: 0xffffff });
-
-//     dirprism1 = new THREE.Mesh(geometry1, material1);
-
-//     // PIEaddElement(dirprism1); //feild line arr ll
-
-//     dirprism1.rotation.x += Math.PI / 2;
-//     dirprism1.rotation.z += Math.PI;
-//     if (currdir == 0) {
-//         dirprism1.position.set(centercoilx - 2 - 9 / (8 - currentVoltage + 1.6), 1.61, centercoilz + 0.3);
-//     } else {
-//         dirprism1.rotation.z += Math.PI;
-//         dirprism1.position.set(centercoilx - 2 - 9 / (8 - currentVoltage + 1.6), 1.61, centercoilz - 0.1);
-//     }
-
-//     var A1 = new THREE.Vector2(-0.1, 0);
-//     var B1 = new THREE.Vector2(0.1, 0);
-//     var C1 = new THREE.Vector2(0, 0.5);
-
-//     var height2 = 0.01;
-
-//     var geometry2 = new PrismGeometry([A1, B1, C1], height2);
-
-//     var material2 = new THREE.MeshBasicMaterial({ color: 0xffffff });
-
-//     dirprism2 = new THREE.Mesh(geometry2, material2);
-//     // PIEaddElement(dirprism2); //arraow on field line lr
-
-//     dirprism2.rotation.x += Math.PI / 2;
-//     dirprism2.rotation.z += Math.PI;
-//     if (currdir == 0) {
-//         dirprism2.rotation.z += Math.PI;
-//         dirprism2.position.set(centercoilx - 2 + 9 / (8 - currentVoltage + 1.6), 1.61, centercoilz - 0.1);
-//     } else {
-//         dirprism2.position.set(centercoilx - 2 + 9 / (8 - currentVoltage + 1.6), 1.61, centercoilz + 0.3);
-//     }
-
-//     var A2 = new THREE.Vector2(-0.1, 0);
-//     var B2 = new THREE.Vector2(0.1, 0);
-//     var C2 = new THREE.Vector2(0, 0.5);
-
-//     var height12 = 0.01;
-
-//     var geometry12 = new PrismGeometry([A2, B2, C2], height12);
-
-//     var material12 = new THREE.MeshBasicMaterial({ color: 0xffffff });
-
-//     dirprism12 = new THREE.Mesh(geometry12, material12);
-//     // PIEaddElement(dirprism12); //fields arrow rl
-
-//     dirprism12.rotation.x += Math.PI / 2;
-//     dirprism12.rotation.z += Math.PI;
-//     if (currdir == 1) {
-//         dirprism12.position.set(centercoilx + 2 - 9 / (8 - currentVoltage + 1.6), 1.61, centercoilz + 0.3);
-//     } else {
-//         dirprism12.rotation.z += Math.PI;
-//         dirprism12.position.set(centercoilx + 2 - 9 / (8 - currentVoltage + 1.6), 1.61, centercoilz - 0.1);
-//     }
-
-//     var A12 = new THREE.Vector2(-0.1, 0);
-//     var B12 = new THREE.Vector2(0.1, 0);
-//     var C12 = new THREE.Vector2(0, 0.5);
-
-//     var height22 = 0.01;
-
-//     var geometry22 = new PrismGeometry([A12, B12, C12], height22);
-
-//     var material22 = new THREE.MeshBasicMaterial({ color: 0xffffff });
-
-//     dirprism22 = new THREE.Mesh(geometry22, material22);
-
-//     // PIEaddElement(dirprism22);//arrow rr
-
-//     dirprism22.rotation.x += Math.PI / 2;
-//     dirprism22.rotation.z += Math.PI;
-//     if (currdir == 1) {
-//         dirprism22.rotation.z += Math.PI;
-//         dirprism22.position.set(centercoilx + 2 + 9 / (8 - currentVoltage + 1.6), 1.61, centercoilz - 0.1);
-//     } else {
-//         dirprism22.position.set(centercoilx + 2 + 9 / (8 - currentVoltage + 1.6), 1.61, centercoilz + 0.3);
-//     }
-// }
-
-
-//////////////////////////////////////////////////////////////////////////
-
-
-// function removeFieldlines() {
-//     for (var i = 0; i <= 4.001; i += 4 / (numberofturns + 4)) {
-//         PIEscene.remove(circle[i]); //on stopping the left loop disapp
-//     }
-//     for (var i = 0; i <= 4.001; i += 4 / (numberofturns + 4)) {
-//         PIEscene.remove(circle2[i]);//on stopping the right loop disapp
-//     }
-//     PIEscene.remove(dirprism1);//on stopping the arrows disapp
-//     PIEscene.remove(dirprism2);
-//     PIEscene.remove(dirprism12);
-//     PIEscene.remove(dirprism22);
-// }
 
 var distfromrod1, distfromrod2;
 var centercoilx = 0;
@@ -960,12 +433,6 @@ function mydragf2(element, newpos) {
 
 /////////////////////////////////////////////////////////
 
-// var needprism1, needprism2;
-// function addMeter() {
-//     //    PIEdragElement(meterTop);
-//     //    PIEsetDrag(meterTop,mydragf);
-
-// }
 
 var base;
 var meshS;
@@ -1358,142 +825,311 @@ var sphere1;
 var dummy2;
 var cube1;
 var h;
+var u;
 function addHorseShoeMagnet(){
 
-    // var baseGeom = new THREE.BoxGeometry(1, .3, .6);
-    //     sphere1 = new THREE.Mesh(baseGeom, new THREE.MeshBasicMaterial({/*color: 0xd3d3d3*/color: "yellow" }));
+//     // var baseGeom = new THREE.BoxGeometry(1, .3, .6);
+//     //     sphere1 = new THREE.Mesh(baseGeom, new THREE.MeshBasicMaterial({/*color: 0xd3d3d3*/color: "yellow" }));
 
-    //     var edges = new THREE.EdgesGeometry(baseGeom);
-    //     var line = new THREE.LineSegments(edges, new THREE.LineBasicMaterial({ color: 0x8B0000 }));
+//     //     var edges = new THREE.EdgesGeometry(baseGeom);
+//     //     var line = new THREE.LineSegments(edges, new THREE.LineBasicMaterial({ color: 0x8B0000 }));
 
-    //     sphere1.add(line);
+//     //     sphere1.add(line);
 
 
-    //     sphere1.position.set(0,0,0); 
+//     //     sphere1.position.set(0,0,0); 
 
-    // var material = new THREE.LineBasicMaterial( { color: 0x000000 } );
-    // var geometry = new THREE.Geometry();
-    // geometry.vertices.push(new THREE.Vector3( 0, 5.2, 0) );
-    // // geometry.vertices.push(new THREE.Vector3( 0, 10, 0) );
-    // geometry.vertices.push(new THREE.Vector3( 0, 0, 0) );
-    // // geometry.translate(0,-5,0);
+//     // var material = new THREE.LineBasicMaterial( { color: 0x000000 } );
+//     // var geometry = new THREE.Geometry();
+//     // geometry.vertices.push(new THREE.Vector3( 0, 5.2, 0) );
+//     // // geometry.vertices.push(new THREE.Vector3( 0, 10, 0) );
+//     // geometry.vertices.push(new THREE.Vector3( 0, 0, 0) );
+//     // // geometry.translate(0,-5,0);
 
-    // line= new THREE.Line( geometry, material );
-    // // line.rotation.z=Math.PI;
-    // line.position.y=5.2;
-    // line.rotation.z=Math.PI;
+//     // line= new THREE.Line( geometry, material );
+//     // // line.rotation.z=Math.PI;
+//     // line.position.y=5.2;
+//     // line.rotation.z=Math.PI;
     
-//     var axesHelper = new THREE.AxesHelper( 5 );
-// PIEscene.add( axesHelper );
+// //     var axesHelper = new THREE.AxesHelper( 5 );
+// // PIEscene.add( axesHelper );
     
 
-    dummy2 = new THREE.Object3D();
-    // dummy2.position.x = 7;
-    // dummy2.position.z = 5;
-    PIEaddElement( dummy2 );
-    dummy2.position.set(0,0,0);
+//     // dummy2 = new THREE.Object3D();
+//     // // dummy2.position.x = 7;
+//     // // dummy2.position.z = 5;
+//     // PIEaddElement( dummy2 );
+//     // dummy2.position.set(0,0,0);
 
-// var g=new THREE.BoxGeometry( 1, 1, 1);
-//     cube1 = new THREE.Mesh( g, new THREE.MeshBasicMaterial({color:"yellow"}) );
-//     var edges = new THREE.EdgesGeometry( g );
+// // var g=new THREE.BoxGeometry( 1, 1, 1);
+// //     cube1 = new THREE.Mesh( g, new THREE.MeshBasicMaterial({color:"yellow"}) );
+// //     var edges = new THREE.EdgesGeometry( g );
+// //     var line = new THREE.LineSegments( edges, new THREE.LineBasicMaterial( { color: 0x8B0000 } ) );
+// //     cube1.add(line);
+
+    
+//     // cube1.position.z = - 5;
+//     // dummy2.add(cube1);
+
+//      // var lampBulbGeom = new THREE.BoxGeometry(10, 10, 10);
+//      var lampBulbGeom = new THREE.SphereGeometry(5, 32, 32);
+    
+//         h = new THREE.Mesh(lampBulbGeom, new THREE.MeshPhongMaterial({ color: 0xffffff, transparent: true, opacity: 0.2 }));
+//     var edges = new THREE.EdgesGeometry( lampBulbGeom );
 //     var line = new THREE.LineSegments( edges, new THREE.LineBasicMaterial( { color: 0x8B0000 } ) );
-//     cube1.add(line);
-
-    
-    // cube1.position.z = - 5;
-    // dummy2.add(cube1);
-
-     var lampBulbGeom = new THREE.BoxGeometry(10, 10, 10);
-    
-        h = new THREE.Mesh(lampBulbGeom, new THREE.MeshPhongMaterial({ color: 0xffffff, transparent: true, opacity: 0 }));
-
-        h.position.set(0, 0, 0);
+//     h.add(line);
+//         // h.position.set(-1, -1, -.3);
+//         // h.position.set(-1, -1, -.3);
         
 
-    var curve2 = new THREE.CubicBezierCurve3(
-    new THREE.Vector3(0, 0 ,0),
-    new THREE.Vector3(0, 3.5,0),
-    new THREE.Vector3(2, 3.5 ,0),
-    new THREE.Vector3(2,0, 0)
-    );
+//     var curve2 = new THREE.CubicBezierCurve3(
+//     new THREE.Vector3(0, 0 ,0),
+//     new THREE.Vector3(0, 3.5,0),
+//     new THREE.Vector3(2, 3.5 ,0),
+//     new THREE.Vector3(2,0, 0)
+//     );
 
-    var tube2 = new THREE.TubeGeometry(curve2, 100, 0.3, 4, false);
-    horseShoeMagnet= new THREE.Mesh(tube2, new THREE.MeshBasicMaterial({ color: "red" }));
+//     var tube2 = new THREE.TubeGeometry(curve2, 100, 0.3, 4, false);
+//     horseShoeMagnet= new THREE.Mesh(tube2, new THREE.MeshBasicMaterial({ color: "red" }));
 
-    var edges = new THREE.EdgesGeometry( tube2 );
-    var line = new THREE.LineSegments( edges, new THREE.LineBasicMaterial( { color: 0x8B0000 } ) );
+//     var edges = new THREE.EdgesGeometry( tube2 );
+//     var line = new THREE.LineSegments( edges, new THREE.LineBasicMaterial( { color: 0x8B0000 } ) );
 
-    // horseShoeMagnet.position.x= 0;
-    // 
-    // horseShoeMagnet.position.set(-.6,-1.8,2);
-    // horseShoeMagnet.rotation.x=-Math.PI/6;
-    // horseShoeMagnet.rotation.y=Math.PI/6;
-    horseShoeMagnet.add(line);
-    h.add(horseShoeMagnet);
-    h.rotation.x=-Math.PI/6+Math.PI/5;
-    h.rotation.z=-Math.PI/100;
-    // h.rotation.y=Math.PI/6;
+//     // horseShoeMagnet.position.x= 0;
+//     // 
+//     // horseShoeMagnet.position.set(-.6,-1.8,2);
+//     // horseShoeMagnet.rotation.x=-Math.PI/6;
+//     // horseShoeMagnet.rotation.y=Math.PI/6;
+//     horseShoeMagnet.add(line);
+//     h.add(horseShoeMagnet);
+//     h.rotation.x=-Math.PI/6+Math.PI/5;
+//     h.rotation.z=-Math.PI/100;
+//     // h.rotation.y=Math.PI/6;
 
-    // tube2.applyMatrix( new THREE.Matrix4().makeTranslation(0, 10, 0) );
-    // dummy2.add(horseShoeMagnet);
-   // var a= horseShoeMagnet.getcenter;
-   // console.log(a);
+//     // tube2.applyMatrix( new THREE.Matrix4().makeTranslation(0, 10, 0) );
+//     // dummy2.add(horseShoeMagnet);
+//    // var a= horseShoeMagnet.getcenter;
+//    // console.log(a);
 
-    // horseShoeMagnet.rotation.y=Math.PI; 
+//     // horseShoeMagnet.rotation.y=Math.PI; 
     
-    // tube2.translate(1,4,0);
-    // horseShoeMagnet.position.set(1,4,0); 
+//     // tube2.translate(1,4,0);
+//     // horseShoeMagnet.position.set(1,4,0); 
 
-    // sphere1.add(horseShoeMagnet);
-    // sphere1.position.set(1,3,0);
+//     // sphere1.add(horseShoeMagnet);
+//     // sphere1.position.set(1,3,0);
 
-    // PIEaddElement(horseShoeMagnet);
+//     // PIEaddElement(horseShoeMagnet);
 
-    //================Pole 1====================//
+//     //================Pole 1====================//
 
-    var curve3 = new THREE.CubicBezierCurve3(
-    new THREE.Vector3(0, 0 ,0),
-    new THREE.Vector3(0, 0,0),
-    new THREE.Vector3(0,-1,0),
-    new THREE.Vector3(0,-1, 0)
-    );
+//     var curve3 = new THREE.CubicBezierCurve3(
+//     new THREE.Vector3(0, 0 ,0),
+//     new THREE.Vector3(0, 0,0),
+//     new THREE.Vector3(0,-1,0),
+//     new THREE.Vector3(0,-1, 0)
+//     );
 
-    var tube3 = new THREE.TubeGeometry(curve3, 100, 0.3, 4, false);
-    var pole1= new THREE.Mesh(tube3, new THREE.MeshBasicMaterial({ color: "yellow" }));
+//     var tube3 = new THREE.TubeGeometry(curve3, 100, 0.3, 4, false);
+//     var pole1= new THREE.Mesh(tube3, new THREE.MeshBasicMaterial({ color: "yellow" }));
 
-    var edges = new THREE.EdgesGeometry( tube3 );
-    var line = new THREE.LineSegments( edges, new THREE.LineBasicMaterial( { color: "gray" } ) );
+//     var edges = new THREE.EdgesGeometry( tube3 );
+//     var line = new THREE.LineSegments( edges, new THREE.LineBasicMaterial( { color: "gray" } ) );
 
-    pole1.add(line);
-    pole1.rotation.y=Math.PI; 
+//     pole1.add(line);
+//     pole1.rotation.y=Math.PI; 
 
-    horseShoeMagnet.add(pole1);
+//     horseShoeMagnet.add(pole1);
 
     
-    //=======================pole 1==========================//
+//     //=======================pole 1==========================//
 
-  var curve4 = new THREE.CubicBezierCurve3(
-    new THREE.Vector3(-2, 0 ,0),
-    new THREE.Vector3(-2, 0,0),
-    new THREE.Vector3(-2,-1,0),
-    new THREE.Vector3(-2,-1, 0)
-    );
+//   var curve4 = new THREE.CubicBezierCurve3(
+//     new THREE.Vector3(-2, 0 ,0),
+//     new THREE.Vector3(-2, 0,0),
+//     new THREE.Vector3(-2,-1,0),
+//     new THREE.Vector3(-2,-1, 0)
+//     );
 
-    var tube4 = new THREE.TubeGeometry(curve4, 100, 0.3, 4, false);
-    var pole2= new THREE.Mesh(tube4, new THREE.MeshBasicMaterial({ color: "white" }));
+//     var tube4 = new THREE.TubeGeometry(curve4, 100, 0.3, 4, false);
+//     var pole2= new THREE.Mesh(tube4, new THREE.MeshBasicMaterial({ color: "white" }));
 
-    var edges =new THREE.EdgesGeometry( tube4 );
-    var line = new THREE.LineSegments( edges, new THREE.LineBasicMaterial( { color: "gray" } ) );
+//     var edges =new THREE.EdgesGeometry( tube4 );
+//     var line = new THREE.LineSegments( edges, new THREE.LineBasicMaterial( { color: "gray" } ) );
 
-    pole2.add(line);
-    pole2.rotation.y=Math.PI; 
+//     pole2.add(line);
+//     pole2.rotation.y=Math.PI; 
 
-    horseShoeMagnet.add(pole2);
-
-
+//     horseShoeMagnet.add(pole2);
 
 
-    //add text of north and south poles
+
+
+//     //add text of north and south poles
+
+
+//             var loader = new THREE.FontLoader();
+//             loader.load("./optimer.json", function (response) {
+//                 font = response;
+
+//                 var geometry = new THREE.TextGeometry("N", {
+//                     font: font,
+//                     size:.3,
+//                     height: .2,
+//                     curveSegments: 3
+//                 });
+
+//                 var thevel1 = new THREE.Mesh(geometry, new THREE.MeshBasicMaterial({ color: 0x000 }));
+
+
+//                 thevel1.position.set(-.12, -.6, -.1);
+//                 // thevel1.rotation.x = -Math.PI/2 ;
+//                 thevel1.rotation.y = -Math.PI/4 ;
+//                 pole1.add(thevel1);
+//                 // base5.rotation.y=Math.PI;
+//                 // PIEaddElement(thevel1);
+
+            
+
+
+//         });
+
+
+//             var loader = new THREE.FontLoader();
+//             loader.load("./optimer.json", function (response) {
+//                 font = response;
+
+//                 var geometry = new THREE.TextGeometry("S", {
+//                     font: font,
+//                     size:.3,
+//                     height: .2,
+//                     curveSegments: 3
+//                 });
+
+//                 var thevel2 = new THREE.Mesh(geometry, new THREE.MeshBasicMaterial({ color: 0x000 }));
+
+
+//                 thevel2.position.set(-.12-2, -.6, -.1);
+//                 // thevel1.rotation.x = -Math.PI/2 ;
+//                 thevel2.rotation.y = -Math.PI/4 ;
+//                 pole2.add(thevel2);
+//                 // base5.rotation.y=Math.PI;
+//                 // PIEaddElement(thevel1);
+
+            
+
+
+//         });
+
+//       var loader = new THREE.FontLoader();
+//             loader.load("./optimer.json", function (response) {
+//                 font = response;
+
+//                 var geometry = new THREE.TextGeometry("N", {
+//                     font: font,
+//                     size:.3,
+//                     height: .05,
+//                     curveSegments: 3
+//                 });
+
+//                 var thevel3 = new THREE.Mesh(geometry, new THREE.MeshBasicMaterial({ color: 0x000 }));
+
+                 
+//                 thevel3.position.set(0.2, -.6, -.0298);
+//                 // thevel1.rotation.x = -Math.PI/2 ;
+//                 thevel3.rotation.y = Math.PI/2+Math.PI/4 ;
+//                 pole2.add(thevel3);              // thevel1.rotation.x = -Ma-.3h.PI/2 ;
+               
+//                 pole1.add(thevel3);
+//                 // base5.rotation.y=Math.PI;
+                
+
+            
+
+
+//         });
+
+
+//             var loader = new THREE.FontLoader();
+//             loader.load("./optimer.json", function (response) {
+//                 font = response;
+
+//                 var geometry = new THREE.TextGeometry("S", {
+//                     font: font,
+//                     size:.3,
+//                     height: .05,
+//                     curveSegments: 3
+//                 });
+
+//                 var thevel4 = new THREE.Mesh(geometry, new THREE.MeshBasicMaterial({ color: 0x000 }));
+
+
+              
+//                 thevel4.position.set(0.2-2, -.6, -.0298);
+//                 // thevel1.rotation.x = -Math.PI/2 ;
+//                 thevel4.rotation.y = Math.PI/2+Math.PI/4 ;
+//                 pole2.add(thevel4);
+//                 // base5.rotation.y=Math.PI;
+//                 // PIEaddElement(thevel1);
+
+//         });
+
+// //==================add horse shoe magnet=======================//
+// // horseShoeMagnet.rotation.y=0;
+// // console.log("hii");
+
+
+
+
+//=====================================changed=============================================//
+
+
+        var path = new THREE.Shape(); // create a U-shape with its parts
+        path.moveTo(-1, 1);
+        path.absarc(0, 0, 1, Math.PI, Math.PI * 2);
+        path.lineTo(1, 1);
+        path.lineTo(.8, 1);
+        path.absarc(0, 0, .8, Math.PI * 2, Math.PI, true);
+        path.lineTo(-.8,1);
+        path.lineTo(-1, 1);
+
+        var extOpt = { // options of extrusion
+            curveSegments: 15,
+            steps: 1,
+            amount: .2,
+            bevelEnabled: false
+        }
+
+        var uGeom = new THREE.ExtrudeGeometry(path, extOpt); // create a geometry
+        uGeom.center(); // center the geometry
+        var average = new THREE.Vector3(); // this variable for re-use
+        uGeom.faces.forEach(function(face){
+          average.addVectors(uGeom.vertices[face.a], uGeom.vertices[face.b]).add(uGeom.vertices[face.c]).divideScalar(3); // find the average vector of a face
+          face.color.setHex(average.x > 0 ? 0xFF0000 : 0x0000FF); // set color of faces, depends on x-coortinate of the average vector
+        });
+
+
+
+
+        var uMat = new THREE.MeshBasicMaterial({ vertexColors: THREE.FaceColors }); // we'll use face colors
+
+        u = new THREE.Mesh(uGeom, uMat);
+        var edges = new THREE.EdgesGeometry(uGeom);
+        var line = new THREE.LineSegments(edges, new THREE.LineBasicMaterial({ color: 0x8B0000 }));
+        u.add(line);
+
+        u.rotation.x=Math.PI-Math.PI/6;
+        u.rotation.y=-Math.PI/6+Math.PI;
+        u.position.set(.25,0.3,2);
+        
+
+
+
+
+
+//=====================================poles text=============================================//
+
+
 
 
             var loader = new THREE.FontLoader();
@@ -1502,18 +1138,19 @@ function addHorseShoeMagnet(){
 
                 var geometry = new THREE.TextGeometry("N", {
                     font: font,
-                    size:.3,
-                    height: .2,
+                    size:.2,
+                    height: .02,
                     curveSegments: 3
                 });
 
-                var thevel1 = new THREE.Mesh(geometry, new THREE.MeshBasicMaterial({ color: 0x000 }));
+                var thevel1 = new THREE.Mesh(geometry, new THREE.MeshBasicMaterial({ color: 0xffffff }));
 
 
-                thevel1.position.set(-.12, -.6, -.1);
+                // thevel1.position.set(-.12, -.6, -.1);
+                thevel1.position.set(.8, .5, .1);
                 // thevel1.rotation.x = -Math.PI/2 ;
-                thevel1.rotation.y = -Math.PI/4 ;
-                pole1.add(thevel1);
+                // thevel1.rotation.y = -Math.PI/4 ;
+                u.add(thevel1);
                 // base5.rotation.y=Math.PI;
                 // PIEaddElement(thevel1);
 
@@ -1529,18 +1166,16 @@ function addHorseShoeMagnet(){
 
                 var geometry = new THREE.TextGeometry("S", {
                     font: font,
-                    size:.3,
-                    height: .2,
+                    size:.2,
+                    height: .02,
                     curveSegments: 3
                 });
 
-                var thevel2 = new THREE.Mesh(geometry, new THREE.MeshBasicMaterial({ color: 0x000 }));
+                var thevel2 = new THREE.Mesh(geometry, new THREE.MeshBasicMaterial({ color: 0xffffff }));
 
-
-                thevel2.position.set(-.12-2, -.6, -.1);
-                // thevel1.rotation.x = -Math.PI/2 ;
-                thevel2.rotation.y = -Math.PI/4 ;
-                pole2.add(thevel2);
+                thevel2.position.set(-1, .5, .1);
+                // thevel2.rotation.y = -Math.PI/4 ;
+                u.add(thevel2);
                 // base5.rotation.y=Math.PI;
                 // PIEaddElement(thevel1);
 
@@ -1555,20 +1190,16 @@ function addHorseShoeMagnet(){
 
                 var geometry = new THREE.TextGeometry("N", {
                     font: font,
-                    size:.3,
-                    height: .05,
+                    size:.2,
+                    height: .02,
                     curveSegments: 3
                 });
 
-                var thevel3 = new THREE.Mesh(geometry, new THREE.MeshBasicMaterial({ color: 0x000 }));
+                var thevel3 = new THREE.Mesh(geometry, new THREE.MeshBasicMaterial({ color: 0xffffff }));
 
-                 
-                thevel3.position.set(0.2, -.6, -.0298);
-                // thevel1.rotation.x = -Math.PI/2 ;
-                thevel3.rotation.y = Math.PI/2+Math.PI/4 ;
-                pole2.add(thevel3);              // thevel1.rotation.x = -Ma-.3h.PI/2 ;
-               
-                pole1.add(thevel3);
+                thevel3.position.set(1, .5, -.1);
+                thevel3.rotation.y=Math.PI;
+                u.add(thevel3);
                 // base5.rotation.y=Math.PI;
                 
 
@@ -1584,28 +1215,22 @@ function addHorseShoeMagnet(){
 
                 var geometry = new THREE.TextGeometry("S", {
                     font: font,
-                    size:.3,
-                    height: .05,
+                    size:.2,
+                    height: .02,
                     curveSegments: 3
                 });
 
-                var thevel4 = new THREE.Mesh(geometry, new THREE.MeshBasicMaterial({ color: 0x000 }));
+                var thevel4 = new THREE.Mesh(geometry, new THREE.MeshBasicMaterial({ color: 0xffffff }));
 
 
+                thevel4.position.set(-.82, .5, -.1);
+                thevel4.rotation.y=Math.PI;
+                u.add(thevel4);
               
-                thevel4.position.set(0.2-2, -.6, -.0298);
-                // thevel1.rotation.x = -Math.PI/2 ;
-                thevel4.rotation.y = Math.PI/2+Math.PI/4 ;
-                pole2.add(thevel4);
                 // base5.rotation.y=Math.PI;
                 // PIEaddElement(thevel1);
 
         });
-
-//==================add horse shoe magnet=======================//
-// horseShoeMagnet.rotation.y=0;
-// console.log("hii");
-
 
 
 }
@@ -1613,9 +1238,9 @@ function addHorseShoeMagnet(){
 function showHorseShoeMagnet(){
 
     // PIEaddElement(horseShoeMagnet); 
-    PIEaddElement(h);
-}
+    PIEaddElement(u);
 
+}
 
 var base5;
 var bar;
@@ -1642,7 +1267,7 @@ function addBarMagnet(){
         base5.position.set(-.5,0,0); 
         bar.add(base5);
         // bar.rotation.x=-Math.PI/6-Math.PI/2;
-         bar.rotation.y=Math.PI/6;
+         bar.rotation.y=-Math.PI/6;
          // base5.rotation.x=Math.PI/6;
          // base5.rotation.x=-Math.PI;
          // base5.rotation.y=Math.PI/6;
@@ -2137,10 +1762,10 @@ function addString(){
 // }
 /////////////////////////////////////////////
 function addElementsToScene() {
-    addCurvedWire();
+    // addCurvedWire();
     // addBulb();
     // addSwitch();
-    mybattery(0, 0, 0);
+    // mybattery(0, 0, 0);
     addTable();
     // addMeter();
     // addArrows();
@@ -2233,9 +1858,13 @@ function stopAnimation() {
         bar.rotation.y=Math.PI/6;
 
         
-        horseShoeMagnet.position.set(-.6,-1.8,2);
-        horseShoeMagnet.rotation.x=-Math.PI/6;
-        horseShoeMagnet.rotation.y=Math.PI/6;
+        // horseShoeMagnet.position.set(-.6,-1.8,2);
+        // horseShoeMagnet.rotation.x=-Math.PI/6;
+        // horseShoeMagnet.rotation.y=Math.PI/6;
+
+        u.rotation.x=Math.PI-Math.PI/6;
+        u.rotation.y=-Math.PI/6+Math.PI;
+        u.position.set(.25,0.3,2);
 
         ringMagnet.position.set(.2, .5, 2);
         ringMagnet.rotation.x=-Math.PI/2-Math.PI/6;
@@ -2244,6 +1873,8 @@ function stopAnimation() {
         buttonMagnet.position.set(.2, .5, 2);
         buttonMagnet.rotation.x=-Math.PI/2-Math.PI/6;
         buttonMagnet.rotation.z=-Math.PI/6+Math.PI;
+
+        PIErender();
 
 
 
@@ -2402,6 +2033,9 @@ function loadExperimentElements() {
     initialiseHelp();
     initialiseInfo();
     initialiseScene();
+    learnMore();
+    var learnmore=PIEaddButton("Learn More");
+    learnmore.addEventListener("click",PIEshowConcept);
     addElementsToScene();
 
     // PIEadjustCamera(-2,5,5);
@@ -2577,6 +2211,7 @@ function changePoles(){
         if(choice=="barmagnet"){
             if(originalPolesBar){
                 originalPolesBar=false;
+                changeStart=1;
                 bar.position.set(.3, 0, 0);
                 bar.rotation.y = Math.PI / 6 + Math.PI;
                 PIErender();
@@ -2592,6 +2227,7 @@ function changePoles(){
         else if(choice=="ringmagnet"){
             if (originalPolesRing) {
                 originalPolesRing=false;
+                changeStart=1;
                 ringMagnet.position.set(.2, .5, 2);
                 ringMagnet.rotation.x=-Math.PI/2-Math.PI/6;
                 ringMagnet.rotation.z = -Math.PI / 6 ;
@@ -2609,6 +2245,7 @@ function changePoles(){
         else if(choice=="buttonmagnet"){
             if (originalPolesButton) {
                 originalPolesButton=false;
+                changeStart=1;
                 buttonMagnet.position.set(.2, .5, 2);
                 buttonMagnet.rotation.x=-Math.PI/2-Math.PI/6;
                 buttonMagnet.rotation.z = -Math.PI / 6;
@@ -2626,18 +2263,18 @@ function changePoles(){
         else if(choice=="horseshoemagnet"){
             if (originalPolesHs) {
                 originalPolesHs = false;
-                
-                horseShoeMagnet.position.set(-.6,-1.8,2);
-                horseShoeMagnet.rotation.x=-Math.PI/6;
-                horseShoeMagnet.rotation.y=Math.PI/6+Math.PI;
+                changeStart=1;
+                u.rotation.x=Math.PI-Math.PI/6;
+                u.rotation.y=-Math.PI/6+Math.PI+Math.PI;
+                u.position.set(.25,0.3,2);
                 PIErender();
             }
             else {
                 originalPolesHs = true;
                  
-                horseShoeMagnet.position.set(-.6,-1.8,2);
-                horseShoeMagnet.rotation.x=-Math.PI/6;
-                horseShoeMagnet.rotation.y=Math.PI/6;
+                u.rotation.x=Math.PI-Math.PI/6;
+                u.rotation.y=-Math.PI/6+Math.PI;
+                u.position.set(.25,0.3,2);
                 PIErender();
             }
 
@@ -2756,7 +2393,7 @@ function chooseRingMagnet(){
 function removePrevMagnets(){
 
     PIEremoveElement(bar);
-    PIEremoveElement(h);
+    PIEremoveElement(u);
     PIEremoveElement(ringMagnet);
     PIEremoveElement(buttonMagnet);
     PIErender();
@@ -2766,24 +2403,7 @@ function removePrevMagnets(){
 
 
 function resetExperiment() {
-    // needprism1.position.set(0.8, 0.6, 5.05);
-    // meterTop.position.set(0.8, 0.5, 5);
-    // meterTop.position.y += 1.35;
-    // needprism1.position.y += 1.35;
-    // needprism1.position.x -= 0.8;
-    // meterTop.position.x -= 0.8;
-    // needprism1.position.z += 1.6;
-    // meterTop.position.z += 1.6;
-    // PIEchangeInputSlider("Voltage", 4);
-    // currentVoltage = 4;
-    // if (numberofturns > 1) {
-    //     // removeFieldlines();
-    // }
-    // PIEchangeInputSlider("Number of turns", 1);
-    // test3(1);
-    // if (flag == 1)
-    //     stopAnimation();
-    // checkClock();
+
 
 }
 
@@ -2792,35 +2412,157 @@ function resetExperiment() {
 
 var tita;
 var titaline;
+var x=0;
+var ang;
+var changeStart=1;
 
 function updateExperimentElements(t, dt) {
-   
+   if(t==0)
+    ang=Math.PI/180;
+
     if(hasChosen==1)
    {
-    tita = -0.05*(t/1000);
-    // horseShoeMagnet.rotation.y+=Math.PI/180*Math.pow(2.7, tita)*Math.cos(t/1000);
-
-    titaline = -0.05*(t/1000);
-    // line.rotation.z-=Math.PI/2800*Math.pow(2.7, titaline)*Math.cos(t/1000);
-    // line.rotation.y-=Math.PI/150*Math.pow(2.7, titaline)*Math.cos(t/1000);
-    // horseShoeMagnet.rotation.z-=Math.PI/1000*Math.pow(2.7, titaline)*Math.cos(t/1000);
-    // bar.rotation.y-=Math.PI/180*Math.pow(2.7, titaline)*Math.cos(t/1000);
-    // buttonMagnet.rotation.z-=Math.PI/180*Math.pow(2.7, titaline)*Math.cos(t/1000);
-    // ringMagnet.rotation.z-=Math.PI/180*Math.pow(2.7, titaline)*Math.cos(t/1000);
+    tita = -0.2*(t/1000);
+    titaline = -0.06*(t/1000);
+    titaline2 = -0.03*(t/1000);
+    
     if(choice=="barmagnet"){
-         bar.rotation.y-=Math.PI/180*Math.pow(2.7, titaline)*Math.cos(t/1000);
+        // bar.position.set(.3, 0, 0);
+        // bar.rotation.y = Math.PI / 6;
+        if (Math.floor(t / 1000) < 50&&t>0){
+            if(!originalPolesBar){
+                if (bar.rotation.y > 0.525&&changeStart==1)
+                    bar.rotation.y -= Math.PI / 100;
+                else{
+                    // console.log("hello");
+                    changeStart=0;
+                    // bar.position.set(.3, 0, 0);
+                    // bar.rotation.y = Math.PI / 6;
+                    bar.rotation.y+=Math.PI/100*Math.pow(2.7, titaline)*Math.cos((2*Math.PI/5)*(t/1000));
+                    // console.log(t / 1000);
+                }
+            }
+            else{
+                // console.log("hiiiii");
+                bar.rotation.y -= Math.PI / 50 * Math.pow(2.7, titaline) * Math.cos((2 * Math.PI / 7) * (t / 1000));
+                // console.log(t / 1000);
+
+            }
+           
+
+            // console.log(bar.rotation.y);
+           
+        }
+        else{
+            bar.position.set(.3, 0, 0);
+            bar.rotation.y = Math.PI / 6;
+            // console.log(t / 1000);
+        }
     }
     else if(choice=="horseshoemagnet"){
-        tita = -0.05*(t/1000);
-         h.rotation.y+=Math.PI/180*Math.pow(2.7, tita)*Math.cos(t/1000);
-         h.rotation.z-=Math.PI/1000*Math.pow(2.7, titaline)*Math.cos(t/1000);
-         h.rotation.x-=Math.PI/2000*Math.pow(2.7, titaline)*Math.cos(t/1000);
+        // tita = -0.05*(t/1000);
+        // u.rotation.y+=Math.PI/100*Math.pow(2.7, tita)*Math.cos(t/1000);
+        if (Math.floor(t / 1000)<50&&t>0){
+                if(!originalPolesHs){
+
+                if (u.rotation.y > 2.614&&changeStart==1)
+                    u.rotation.y -= Math.PI / 100;
+                else{
+                    // console.log("hello");
+                    changeStart=0;
+                    // bar.position.set(.3, 0, 0);
+                    // bar.rotation.y = Math.PI / 6;
+                    u.rotation.y-=Math.PI/100*Math.pow(2.7, titaline)*Math.cos((2*Math.PI/5)*(t/1000));
+                    // console.log(t / 1000);
+                }
+            }
+            else{
+                u.rotation.y -= Math.PI / 50 * Math.pow(2.7, titaline) * Math.cos((2 * Math.PI / 7) * (t / 1000));
+                // console.log(t / 1000);
+            }
+
+
+
+            
+        }
+        else{
+            u.rotation.x = Math.PI - Math.PI / 6;
+            u.rotation.y = -Math.PI / 6 + Math.PI;
+            u.position.set(.25, 0.3, 2);
+            // console.log(t / 1000);
+        }
+         // h.rotation.z-=Math.PI/1000*Math.pow(2.7, titaline)*Math.cos(t/1000);
+         // h.rotation.x-=Math.PI/2000*Math.pow(2.7, titaline)*Math.cos(t/1000); 
+
+
+         // changes
+        
+         // u.rotation.y+=Math.PI/180;
+         // h.rotation.z-=Math.PI/1000*Math.pow(2.7, titaline)*Math.cos(t/1000);
+         // h.rotation.x-=Math.PI/2000*Math.pow(2.7, titaline)*Math.cos(t/1000);
+         // console.log(u.rotation.y);
     }
     else if(choice=="buttonmagnet"){
-        buttonMagnet.rotation.z-=Math.PI/180*Math.pow(2.7, titaline)*Math.cos(t/1000);
+        if (Math.floor(t / 1000) < 50 && t>0){
+        
+                if(!originalPolesButton){
+
+                if (buttonMagnet.rotation.z > -3.965&&changeStart==1)
+                    buttonMagnet.rotation.z -= Math.PI / 100;
+                else{
+                    // console.log("hello");
+                    changeStart=0;
+                    // bar.position.set(.3, 0, 0);
+                    // bar.rotation.y = Math.PI / 6;
+                    buttonMagnet.rotation.z-=Math.PI/130*Math.pow(2.7, titaline2)*Math.cos((2*Math.PI/5)*(t/1000));
+                    // console.log(t / 1000);
+                }
+            }
+            else{
+                buttonMagnet.rotation.z -= Math.PI / 50 * Math.pow(2.7, titaline) * Math.cos((2 * Math.PI / 7) * (t / 1000));
+                // console.log(t / 1000);
+            }
+            
+        }
+        else{
+            buttonMagnet.position.set(.2, .5, 2);
+            buttonMagnet.rotation.x = -Math.PI / 2 - Math.PI / 6;
+            buttonMagnet.rotation.z = -Math.PI / 6 + Math.PI;
+            // console.log(t / 1000);
+        }
+
+        // console.log(buttonMagnet.rotation.z);
     }  
     else if(choice=="ringmagnet"){
-        ringMagnet.rotation.z-=Math.PI/180*Math.pow(2.7, titaline)*Math.cos(t/1000);
+             if (Math.floor(t / 1000) < 50 && t>0){
+        
+                if(!originalPolesRing){
+
+                if (ringMagnet.rotation.z > -3.965&&changeStart==1)
+                    ringMagnet.rotation.z -= Math.PI / 100;
+                else{
+                    // console.log("hello");
+                    changeStart=0;
+                    // bar.position.set(.3, 0, 0);
+                    // bar.rotation.y = Math.PI / 6;
+                    ringMagnet.rotation.z-=Math.PI/130*Math.pow(2.7, titaline2)*Math.cos((2*Math.PI/5)*(t/1000));
+                    // console.log(t / 1000);
+                }
+            }
+            else{
+                ringMagnet.rotation.z -= Math.PI / 50 * Math.pow(2.7, titaline) * Math.cos((2 * Math.PI / 7) * (t / 1000));
+                // console.log(t / 1000);
+            }
+            
+        }
+        else{
+            ringMagnet.position.set(.2, .5, 2);
+            ringMagnet.rotation.x = -Math.PI / 2 - Math.PI / 6;
+            ringMagnet.rotation.z = -Math.PI / 6 + Math.PI;
+            // console.log(t / 1000);
+        }
+
+        // console.log(ringMagnet.rotation.z);
     }
 
 
@@ -2840,6 +2582,7 @@ function updateExperimentElements(t, dt) {
     // PIEcamera.rotation.z-=Math.PI/1800;
 
     }
+    PIErender();
 }
 
 
